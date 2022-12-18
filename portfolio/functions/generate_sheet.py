@@ -1,4 +1,4 @@
-from funcs import get_correlation
+from portfolio.functions.funcs import get_correlation
 import time
 
 start = time.time()
