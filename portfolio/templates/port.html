@@ -1,21 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <html lang="en">
+
 <head>
-  <title>TableView - Startup</title>
+  <title>Portfolio</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'template.css' %}" />
+  <script src="{% static 'dropdown.js' %}"></script>
 </head>
 
 <body>
-    <li><a href="{% url 'home:home' %}">Home</a></li>
-    <li><a href="{% url 'portfolio:portfolio' %}">Portfolio</a></li>
+  <h2>It's working!</h2>
+  <div class="navbar" style="width: 100%; margin: 0 auto;">
+    <a href="{% url 'home:home' %}">Home</a>
+    <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
+    <div class="dropdown">
+      <button class="dropbtn" onclick="drop()">Dropdown
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content" id="myDropdown">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="width: 10%">
     {{df|safe}}
+  </div>
+
 </body>
 
 </html>
