@@ -105,12 +105,24 @@ body {
     background: #ccc;
 }
 
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+    /* Footer height */
+}
+
+
 .footer {
-    position: fixed;
+    position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: r#e9e9e9;
+    background-color: #e9e9e9;
     color: rgb(0, 0, 0);
     text-align: center;
 }

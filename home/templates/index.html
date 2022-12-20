@@ -13,37 +13,42 @@
 
 
 <body>
-    <h2 style="font-family: Garamond, serif;">Kibler Strategies</h2>
-    <div class="topnav">
-        &nbsp; &nbsp; &nbsp;
-        <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
-        <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
-        <a href="{% url 'about:about' %}">About</a>
-        <div class="dropdown">
-            <button class="dropbtn" onclick="drop()">Dropdown
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content" id="myDropdown">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+    <div id="page-container">
+        <div id="content-wrap">
+            <h2 style="font-family: Garamond, serif;margin-left: 20px;">Kibler Strategies</h2>
+            <div class="topnav">
+                &nbsp; &nbsp; &nbsp;
+                <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
+                <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
+                <a href="{% url 'about:about' %}">About</a>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="drop()">Dropdown
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content" id="myDropdown">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
             </div>
-        </div>
-        <div class="search-container">
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
+
+            <a href="{% url 'home:home' %}" style="background-color: transparent;"><img
+                    src="{% static 'manila_folder.jpg' %}" style="width:25%;" /></a>
+
+
+            <footer id="footer" class="footer">
+                <p>
+                    Kibler Strategies 2022
+                </p>
+            </footer>
+
         </div>
     </div>
-
-    <a href="{% url 'home:home' %}" style="background-color: transparent;"><img src="{% static 'manila_folder.jpg' %}"
-            style="width:25%;" /></a>
-
-    <div class="footer">
-        <p>
-            Kibler Strategies 2022
-        </p>
-    </div>
-
 </body>
 
 </html>
