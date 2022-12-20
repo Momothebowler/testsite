@@ -79,7 +79,6 @@ def get_covar(tickers):
 
     df2 = df.T
     df = df2.dot(df)
-    print(df / (len(df) - 1))
     return df / (len(df) - 1)
 
 
