@@ -6,21 +6,23 @@
 
 <head>
   <title>Portfolio</title>
+  <link rel="icon" href="{% static 'favicon.ico' %}">
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{% static 'template.css' %}" />
+  <link rel="stylesheet" href="{% static 'port.css' %}" />
   <script src="{% static 'dropdown.js' %}"></script>
 </head>
 
 <body>
   <h2>It's working!</h2>
-  <div class="navbar" style="width: 100%; margin: 0 auto;">
-    <a href="{% url 'home:home' %}">Home</a>
+  <div class="topnav">
+    <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
     <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
+    <a href="{% url 'about:about' %}">About</a>
     <div class="dropdown">
       <button class="dropbtn" onclick="drop()">Dropdown
         <i class="fa fa-caret-down"></i>
@@ -31,12 +33,20 @@
         <a href="#">Link 3</a>
       </div>
     </div>
+    <div class="search-container">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
   </div>
 
   <div style="width: 10%">
     {{df|safe}}
   </div>
-
+  <div class="footer">
+    <p>
+      Kibler Strategies 2022
+    </p>
+  </div>
 </body>
 
 </html>

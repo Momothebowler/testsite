@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'home.css' %}" />
     <script src="{% static 'dropdown.js' %}"></script>
+
 </head>
 
 
 <body>
     <h2 style="font-family: Garamond, serif;">Kibler Strategies</h2>
     <div class="topnav">
-        &nbsp; &nbsp; &nbsp;
         <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
         <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
         <a href="{% url 'about:about' %}">About</a>
@@ -35,15 +35,12 @@
         </div>
     </div>
 
-    <a href="{% url 'home:home' %}" style="background-color: transparent;"><img src="{% static 'manila_folder.jpg' %}"
-            style="width:25%;" /></a>
-
+    We are a group of creators looking to help people out finacially.
     <div class="footer">
         <p>
             Kibler Strategies 2022
         </p>
     </div>
-
 </body>
 
 </html>
