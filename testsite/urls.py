@@ -27,4 +27,5 @@ urlpatterns = [
     path("home/", include("home.urls"), name=""),
     #
     path("about/", include("about.urls"), name="about"),
+    path("questions/", include("questions.urls"), name="questions"),
 ]

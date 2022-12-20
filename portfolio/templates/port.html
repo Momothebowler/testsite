@@ -25,6 +25,7 @@
         <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
         <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
         <a href="{% url 'about:about' %}">About</a>
+        <a href="{% url 'questions:questions' %}">Quest</a>
         <div class="dropdown">
           <button class="dropbtn" onclick="drop()">Dropdown
             <i class="fa fa-caret-down"></i>
@@ -41,9 +42,17 @@
         </div>
       </div>
 
-      <div style="width: 10%;margin-left: 75px;">
-        {{df|safe}}
-      </div>
+
+      <section>
+        <form method="get">
+          <input type="submit" value={{x}} name="mybtn" id="start_submit" class="btn btn-success" />
+          <div style="width: 10%;margin-left: 75px;">
+            {{df|safe}}
+          </div>
+        </form>
+      </section>
+
+
       <footer id="footer" class="footer">
         <p>
           Kibler Strategies 2022

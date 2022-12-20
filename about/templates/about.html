@@ -7,7 +7,7 @@
     <link rel="icon" href="{% static 'favicon.ico' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'home.css' %}" />
+    <link rel="stylesheet" href="{% static 'about.css' %}" />
     <script src="{% static 'dropdown.js' %}"></script>
 
 </head>
@@ -21,6 +21,7 @@
                 <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
                 <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
                 <a href="{% url 'about:about' %}">About</a>
+                <a href="{% url 'questions:questions' %}">Quest</a>
                 <div class="dropdown">
                     <button class="dropbtn" onclick="drop()">Dropdown
                         <i class="fa fa-caret-down"></i>
@@ -37,7 +38,11 @@
                 </div>
             </div>
 
-            We are a group of creators looking to help people out finacially.
+            <section style="min-height: 100vh;width: 100%; background-color: aliceblue;">
+                <div>
+                    <h3 style="margin:0">We are a group of creators looking to help people out finacially.</h3>
+                </div>
+            </section>
             <footer id="footer" class="footer">
                 <p>
                     Kibler Strategies 2022

@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'quest.css' %}" />
+    <script src="{% static 'dropdown.js' %}"></script>
+
+</head>
+
+
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+            <h2 style="font-family: Garamond, serif;margin-left: 20px;">Kibler Strategies</h2>
+            <div class="topnav">
+                <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
+                <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
+                <a href="{% url 'about:about' %}">About</a>
+                <a href="{% url 'questions:questions' %}">Quest</a>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="drop()">Dropdown
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content" id="myDropdown">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <section>
+                <div class="container">
+
+                    <form>
+
+                        <div class="step step-1 active">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName">
+                            </div>
+                            <div class="form-group">
+                                <label for="nickName">Nick Name</label>
+                                <input type="text" id="nickName" name="nickName">
+                            </div>
+                            <button type="button" class="next-btn">Next</button>
+                        </div>
+
+                        <div class="step step-2">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="number" id="phone" name="phone-number">
+                            </div>
+                            <button type="button" class="previous-btn">Previous</button>
+                            <button type="button" class="next-btn">Next</button>
+                        </div>
+
+                        <div class="step step-3">
+                            <div class="form-group">
+                                <label for="country">County</label>
+                                <input type="text" id="country" name="country">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city">
+                            </div>
+                            <div class="form-group">
+                                <label for="postCode">Post Code</label>
+                                <input type="text" id="postCode" name="postCode">
+                            </div>
+                            <button type="button" class="previous-btn">Previous</button>
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </section>
+            <script src="{% static 'quest.js' %}"></script>
+
+            <footer id="footer" class="footer">
+                <p>
+                    Kibler Strategies 2022
+                </p>
+            </footer>
+
+        </div>
+    </div>
+</body>
+
+</html>
