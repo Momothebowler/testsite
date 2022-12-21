@@ -57,7 +57,8 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://testsite-production.up.railway.app/",
+    "https://testsite-production.up.railway.app",
+    "https://mainsite-production.up.railway.app",
 ]
 
 ROOT_URLCONF = "testsite.urls"
