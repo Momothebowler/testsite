@@ -8,9 +8,7 @@
   <title>Portfolio</title>
   <link rel="icon" href="{% static 'favicon.ico' %}">
   <meta charset="utf-8">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'port.css' %}" />
@@ -44,12 +42,21 @@
 
 
       <section>
-        <form method="get">
-          <input type="submit" value={{x}} name="mybtn" id="start_submit" class="btn btn-success" />
+
+        <form id="post-form">
+          {% csrf_token %}
+          <input id="create-btn" name="create-btn" type="submit" />
+          <div name="name" id="name"></div>
+
+
+
+          <!--<input type="submit" value={{x}} name="mybtn" id="start_submit" class="btn btn-success" />
           <div style="width: 10%;margin-left: 75px;">
             {{df|safe}}
-          </div>
+          </div>-->
+
         </form>
+
       </section>
 
 
@@ -62,5 +69,23 @@
     </div>
   </div>
 </body>
+<script type="text/javascript">
+  $(document).on('submit', '#post-form', function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: 'create',
+      data: {
+        name: $('#name').text(),
+        csrfmiddlewaretoken: $('[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function (data) {
+        $('#name').html(data);
+        console.log($("#create-btn"))
+        document.getElementById("create-btn").style.display = "none";
+      }
+    });
+  });
+</script>
 
 </html>
