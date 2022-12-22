@@ -8,7 +8,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 def spyGet():
@@ -82,7 +81,7 @@ def evaulate(ticks):
     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
     chrome_options.add_experimental_option("detach", True)
     chrome_options.headless = True
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     driver.maximize_window()
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
