@@ -43,7 +43,8 @@ aptPkgs = ["...",
 "libnss3", 
 "lsb-release xdg-utils",
 "libxshmfence-dev", 
-"wget"]
+"wget",
+"xvfb"]
 
 
 
