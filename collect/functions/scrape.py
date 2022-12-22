@@ -82,7 +82,7 @@ def evaulate(ticks):
     options.headless = True
 
     # driver = webdriver.Chrome(chrome_options=options) use for my laptop
-    options.binary_location = os.environ.get("FIREFOX_BIN")
+    options.binary_location = os.environ.get("FIREFOX")
     driver = webdriver.Firefox(
         executable_path=os.environ.get("GECKODRIVER_PATH"), options=options
     )
