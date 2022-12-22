@@ -91,7 +91,9 @@ def evaulate(ticks):
     options.add_argument("--disable-dev-shm-usage")
 
     driver = webdriver.Chrome(
-        executable_path=str(os.environ.get("CHROMEDRIVER_PATH")), chrome_options=options
+        executable_path=str(os.environ.get("CHROMEDRIVER_PATH")),
+        chrome_options=options,
+        service_args=["--verbose"],
     )
     driver.maximize_window()
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
