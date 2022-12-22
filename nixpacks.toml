@@ -39,7 +39,8 @@ aptPkgs = ["chromium-browser",
 "fonts-liberation",
 "libappindicator1", 
 "libnss3", 
-"lsb-release xdg-utils", 
+"lsb-release xdg-utils",
+"libxshmfence-dev", 
 "wget"]
 
 
