@@ -8,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
+import os
 
 
 def spyGet():
@@ -81,8 +82,10 @@ def evaulate(ticks):
     options.headless = True
 
     # driver = webdriver.Chrome(chrome_options=options) use for my laptop
-    options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
-    driver = webdriver.Firefox(options=options)
+    options.binary_location = os.environ.get("FIREFOX_BIN")
+    driver = webdriver.Firefox(
+        executable_path=os.environ.get("GECKODRIVER_PATH"), options=options
+    )
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
