@@ -90,7 +90,7 @@ def evaulate(ticks):
     options.add_argument("--single-process")
     options.add_experimental_option("useAutomationExtension", False)
 
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(chrome_options=options)
     driver.maximize_window()
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
