@@ -77,11 +77,15 @@ def evaulate(ticks):
         arr[0] = round(arr[0] - (total - 100), 2)
     arr = ["".join(item) for item in arr.astype(str)]
 
-    chrome_options = Options()
-    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    chrome_options.add_experimental_option("detach", True)
-    chrome_options.headless = True
-    driver = webdriver.Chrome(options=chrome_options)
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("disable-infobars")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    options.headless = True
+    driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
