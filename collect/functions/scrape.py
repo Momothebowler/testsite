@@ -2,14 +2,12 @@ import requests
 import lxml.html as lh
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
-from pyvirtualdisplay import Display
-import os
 
 
 def spyGet():
@@ -79,23 +77,11 @@ def evaulate(ticks):
         arr[0] = round(arr[0] - (total - 100), 2)
     arr = ["".join(item) for item in arr.astype(str)]
 
-    display = Display(visible=0, size=(800, 800))
-    display.start()
     options = Options()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_argument("--no-sandbox")
     options.headless = True
-    options.add_argument("disable-infobars")
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Chrome(
-        executable_path=str(os.environ.get("CHROMEDRIVER_PATH")),
-        chrome_options=options,
-        service_args=["--verbose"],
-    )
-    driver.maximize_window()
+    # driver = webdriver.Chrome(chrome_options=options) use for my laptop
+    driver = webdriver.Firefox(options=options)
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
     if len(ticks) / 10 >= 1:
