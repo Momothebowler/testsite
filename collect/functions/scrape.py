@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
 from pyvirtualdisplay import Display
+import os
 
 
 def spyGet():
@@ -81,6 +82,7 @@ def evaulate(ticks):
     display = Display(visible=0, size=(800, 800))
     display.start()
     options = Options()
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     options.add_argument("--no-sandbox")
     options.add_argument("--headless")
     options.add_argument("disable-infobars")
@@ -91,7 +93,9 @@ def evaulate(ticks):
     options.add_argument("--remote-debugging-port=9222")
     options.add_experimental_option("useAutomationExtension", False)
 
-    driver = webdriver.Chrome(chrome_options=options)
+    driver = webdriver.Chrome(
+        executable_path=str(os.environ.get("CHROMEDRIVER_PATH")), chrome_options=options
+    )
     driver.maximize_window()
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
