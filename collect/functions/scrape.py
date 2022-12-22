@@ -82,9 +82,7 @@ def evaulate(ticks):
 
     # driver = webdriver.Chrome(chrome_options=options) use for my laptop
     options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
-    driver = webdriver.Firefox(
-        executable_path=r"C:\WebDrivers\geckodriver.exe", options=options
-    )
+    driver = webdriver.Firefox(options=options)
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
