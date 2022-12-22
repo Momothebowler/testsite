@@ -84,6 +84,7 @@ def evaulate(ticks):
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-gpu")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--remote-debugging-port=9222")
 
     driver = webdriver.Chrome(options=options)
     driver.maximize_window()
