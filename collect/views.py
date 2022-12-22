@@ -1,17 +1,17 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
-from portfolio.functions.funcs import get_covar
-import json
+# from collect.functions.scrape import getSpy
+from collect.functions.scrape import spyGet, evaulate
 
 
-def portfolio(request):
-    return render(request, "port.html")
+def collect(request):
+    return render(request, "collect.html")
 
 
 def create(request):
     if request.method == "POST":
-        df = get_covar(json.loads(open("tickers.json").read())["tickers"])
+        tickers = ["TSLA", "AMZN", "AAPL", "GOOG", "NOK", "BBBY", "GME"]
+        df = evaulate(tickers)
         mydict = {
             "df": df.to_html(
                 float_format=lambda x: "%10.2f" % x,
@@ -21,6 +21,7 @@ def create(request):
                 col_space="38.25px",
             )
         }
+        df.index += 1
         df = df.to_html(
             float_format=lambda x: "%10.2f" % x,
             border=3,
@@ -28,14 +29,4 @@ def create(request):
             justify="center",
             col_space="38.25px",
         )
-        # name = request.POST["name"]
-        # if name == "":
-        # name = "0"
-        # else:
-        # pass
-        # name = int(name) + 1
-        # new_x = Profile(x=x)
-        # new_x.save()
-        # name = str(name)
-        # success = str(name)
         return HttpResponse(df)

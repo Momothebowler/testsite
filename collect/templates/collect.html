@@ -6,10 +6,10 @@
     <title>Home</title>
     <link rel="icon" href="{% static 'favicon.ico' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'about.css' %}" />
+    <link rel="stylesheet" href="{% static 'collect.css' %}" />
     <script src="{% static 'dropdown.js' %}"></script>
-
 </head>
 
 
@@ -18,6 +18,7 @@
         <div id="content-wrap">
             <h2 style="font-family: Garamond, serif;margin-left: 20px;">Kibler Strategies</h2>
             <div class="topnav">
+                &nbsp; &nbsp; &nbsp;
                 <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
                 <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
                 <a href="{% url 'about:about' %}">About</a>
@@ -39,11 +40,23 @@
                 </div>
             </div>
 
-            <section style="min-height: 100vh;width: 100%; background-color: aliceblue;">
-                <div>
-                    <h3 style="margin:0">We are a group of creators looking to help people out finacially.</h3>
-                </div>
+
+            <section>
+
+                <form id="post-form">
+                    {% csrf_token %}
+                    <input id="create-btn" name="create-btn" type="submit" />
+                    <div name="name" id="name"></div>
+                    <!--<input type="submit" value={{x}} name="mybtn" id="start_submit" class="btn btn-success" />
+                  <div style="width: 10%;margin-left: 75px;">
+                    {{df|safe}}
+                  </div>-->
+                </form>
+
             </section>
+
+
+
             <footer id="footer" class="footer">
                 <p>
                     Kibler Strategies 2022
@@ -53,5 +66,6 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="{% static 'collect_table.js' %}"></script>
 
 </html>
