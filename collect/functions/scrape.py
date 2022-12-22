@@ -84,6 +84,7 @@ def evaulate(ticks):
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-gpu")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--single-process")
     options.add_experimental_option("useAutomationExtension", False)
 
     driver = webdriver.Chrome(options=options)
@@ -118,7 +119,7 @@ def evaulate(ticks):
         By.XPATH, "//*[@id='growthChart']/div[2]/div[2]/div/div[1]/table/tbody"
     )
     output = output.get_attribute("innerHTML")
-    driver.close()
+    driver.quit()
 
     ticker = re.findall("<td>(.*?)</td>", str(output))
     percent = re.findall('<td class="numberCell">(.*?)</td>', str(output))

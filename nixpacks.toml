@@ -1,5 +1,7 @@
+providers = ["...", "python"]
 [phases.setup]
-aptPkgs = ["chromium-browser",
+aptPkgs = ["...",
+"chromium-browser",
 "libglib2.0-0", 
 "libnss3",
 "libgconf-2-4",
