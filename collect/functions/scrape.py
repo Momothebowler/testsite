@@ -2,7 +2,7 @@ import requests
 import lxml.html as lh
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -80,12 +80,7 @@ def evaulate(ticks):
 
     options = Options()
     options.headless = True
-
-    # driver = webdriver.Chrome(chrome_options=options) use for my laptop
-    options.binary_location = os.environ.get("FIREFOX")
-    driver = webdriver.Firefox(
-        executable_path=os.environ.get("GECKODRIVER_PATH"), options=options
-    )
+    driver = webdriver.Chrome(options=options)
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
