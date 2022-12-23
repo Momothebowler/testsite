@@ -1,4 +1,4 @@
-providers = ["...", "python"]
+providers = ["...","chromedriver","google-chrome", "python"]
 [phases.setup]
 aptPkgs = ["..."]
 

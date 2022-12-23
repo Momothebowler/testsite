@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
-import os
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 def spyGet():
@@ -80,7 +80,11 @@ def evaulate(ticks):
 
     options = Options()
     options.headless = True
-    driver = webdriver.Chrome(options=options)
+    options.add_argument("window-size=1920x1480")
+    options.add_argument("disable-dev-shm-usage")
+    driver = webdriver.Chrome(
+        options=options, executable_path=ChromeDriverManager().install()
+    )
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
