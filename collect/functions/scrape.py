@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
 from webdriver_manager.chrome import ChromeDriverManager
+from pyvirtualdisplay import Display
 
 
 def spyGet():
@@ -78,6 +79,8 @@ def evaulate(ticks):
         arr[0] = round(arr[0] - (total - 100), 2)
     arr = ["".join(item) for item in arr.astype(str)]
 
+    display = Display(visible=0, size=(800, 800))
+    display.start()
     options = Options()
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
