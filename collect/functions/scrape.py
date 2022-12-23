@@ -9,7 +9,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
 from webdriver_manager.chrome import ChromeDriverManager
-from pyvirtualdisplay import Display
 
 
 def spyGet():
@@ -79,17 +78,14 @@ def evaulate(ticks):
         arr[0] = round(arr[0] - (total - 100), 2)
     arr = ["".join(item) for item in arr.astype(str)]
 
-    display = Display(visible=0, size=(800, 800))
-    display.start()
     options = Options()
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-infobars")
     options.add_argument("--disable-gpu")
-    options.add_argument("--disable-extensions")
     options.add_argument("--headless")
-    options.add_argument("--start-maximized")
-    options.add_argument("--remote-debugging-port=9222")
+    chrome_prefs = {}
+    options.experimental_options["prefs"] = chrome_prefs
+    chrome_prefs["profile.default_content_settings"] = {"images": 2}
     driver = webdriver.Chrome(
         options=options, executable_path=ChromeDriverManager().install()
     )
