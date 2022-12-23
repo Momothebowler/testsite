@@ -79,7 +79,6 @@ def evaulate(ticks):
     arr = ["".join(item) for item in arr.astype(str)]
 
     options = Options()
-    options.binary_location = "/root/.nix-profile/bin/google-chrome-beta"
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
@@ -121,7 +120,7 @@ def evaulate(ticks):
         By.XPATH, "//*[@id='growthChart']/div[2]/div[2]/div/div[1]/table/tbody"
     )
     output = output.get_attribute("innerHTML")
-    driver.quit()
+    driver.close()
 
     ticker = re.findall("<td>(.*?)</td>", str(output))
     percent = re.findall('<td class="numberCell">(.*?)</td>', str(output))
