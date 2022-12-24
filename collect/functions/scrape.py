@@ -82,7 +82,9 @@ def evaulate(ticks):
 
     options = Options()
     options.headless = True
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(
+        options=options, service=FirefoxService(GeckoDriverManager().install())
+    )
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
