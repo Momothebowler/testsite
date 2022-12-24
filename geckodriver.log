@@ -1,0 +1,71 @@
+1671903402710	geckodriver	INFO	Listening on 127.0.0.1:49672
+1671903536395	geckodriver	INFO	Listening on 127.0.0.1:49492
+1671903539437	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "49493" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileOAQHhP"
+*** You are running in headless mode.
+1671903539841	Marionette	INFO	Marionette enabled
+1671903539851	Marionette	INFO	Listening on port 49512
+Read port: 49512
+WebDriver BiDi listening on ws://127.0.0.1:49493
+1671903539961	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileOAQHhP\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:49493/devtools/browser/c13899e9-4097-42cc-85d9-8b089bd4ee22
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.portfoliovisualizer.com."
+1671903583650	geckodriver	INFO	Listening on 127.0.0.1:55470
+1671903586602	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55471" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofile19I0we"
+1671903589158	Marionette	INFO	Marionette enabled
+1671903589166	Marionette	INFO	Listening on port 55507
+Read port: 55507
+WebDriver BiDi listening on ws://127.0.0.1:55471
+1671903589386	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofile19I0we\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55471/devtools/browser/657e118e-8ad0-401a-ab53-8d82345c7f4d
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.portfoliovisualizer.com."
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 560: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1671903687855	Marionette	INFO	Stopped listening on port 55507
+1671903689070	geckodriver	INFO	Listening on 127.0.0.1:50346
+1671903692245	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50347" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileMnXcW8"
+1671903694070	Marionette	INFO	Marionette enabled
+1671903694075	Marionette	INFO	Listening on port 50371
+Read port: 50371
+WebDriver BiDi listening on ws://127.0.0.1:50347
+1671903694185	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileMnXcW8\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:50347/devtools/browser/707f4e80-7373-4804-a183-c7211228d1d2
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.portfoliovisualizer.com."
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 560: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1671903778985	Marionette	INFO	Stopped listening on port 50371
+e-debugging-port" "53433" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileU9mcz4"
+1671903751494	Marionette	INFO	Marionette enabled
+1671903751499	Marionette	INFO	Listening on port 53455
+Read port: 53455
+WebDriver BiDi listening on ws://127.0.0.1:53433
+1671903751613	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileU9mcz4\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:53433/devtools/browser/c128e798-4667-4d5d-b6b1-04605e89f738
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.portfoliovisualizer.com."
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 560: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 560: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1671903911611	Marionette	INFO	Stopped listening on port 53455
+1671903919438	geckodriver	INFO	Listening on 127.0.0.1:50719
+1671903923824	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50720" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofilepg314J"
+1671903924789	Marionette	INFO	Marionette enabled
+1671903924795	Marionette	INFO	Listening on port 57102
+WebDriver BiDi listening on ws://127.0.0.1:50720
+Read port: 57102
+1671903925079	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofilepg314J\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:50720/devtools/browser/ce013d86-5b8c-4932-8b1f-45e317e5fee0
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.portfoliovisualizer.com."
+1671904044686	Marionette	INFO	Stopped listening on port 57102
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "62665" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileUS9anX"
+1671904029046	Marionette	INFO	Marionette enabled
+1671904029053	Marionette	INFO	Listening on port 62685
+Read port: 62685
+WebDriver BiDi listening on ws://127.0.0.1:62665
+1671904029187	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileUS9anX\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:62665/devtools/browser/a42e0bb1-2d80-48f9-a3cd-46ebc9c6cf0d
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.portfoliovisualizer.com."
+1671904036774	Marionette	INFO	Stopped listening on port 62685

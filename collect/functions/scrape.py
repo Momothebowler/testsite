@@ -81,10 +81,8 @@ def evaulate(ticks):
     arr = ["".join(item) for item in arr.astype(str)]
 
     options = Options()
-    options.headless = True
-    driver = webdriver.Firefox(
-        options=options, service=FirefoxService(GeckoDriverManager().install())
-    )
+    # options.headless = True
+    driver = webdriver.Firefox(options=options)
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
     driver.refresh()
@@ -112,8 +110,13 @@ def evaulate(ticks):
     # Above is Full XPATH
     # Below is XPATH
     # //*[@id="growthChart"]/div[2]/div[2]/div/div[1]/table/tbody
-    output = driver.find_element(
-        By.XPATH, "//*[@id='growthChart']/div[2]/div[2]/div/div[1]/table/tbody"
+    output = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (
+                By.XPATH,
+                "/html/body/div[1]/div[6]/div[1]/div[2]/div[2]/div/div[1]/table/tbody",
+            )
+        )
     )
     output = output.get_attribute("innerHTML")
     driver.close()
