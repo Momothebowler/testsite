@@ -2,12 +2,13 @@ import requests
 import lxml.html as lh
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
+
+from selenium.webdriver.firefox.options import Options
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 
@@ -80,6 +81,7 @@ def evaulate(ticks):
     arr = ["".join(item) for item in arr.astype(str)]
 
     options = Options()
+    options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
     options.headless = True
     driver = webdriver.Firefox(
         options=options, service=FirefoxService(GeckoDriverManager().install())
