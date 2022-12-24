@@ -11,7 +11,7 @@ def collect(request):
 def create(request):
     if request.method == "POST":
         tickers = ["TSLA", "AMZN", "AAPL", "GOOG", "NOK", "BBBY", "GME"]
-        df = evaulate(tickers)
+        df = evaulate()  # tickers)
         mydict = {
             "df": df.to_html(
                 float_format=lambda x: "%10.2f" % x,
