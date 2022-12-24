@@ -43,7 +43,9 @@ def evaulate():
 
     ticker_inputs = []
     allocation_inputs = []
+    print("\n\n\n")
     print(elements)
+    print("\n\n\n")
     for x in elements:
         if "symbol" in x.get_attribute("name"):
             ticker_inputs.append(x)
