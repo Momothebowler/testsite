@@ -38,15 +38,10 @@ def evaulate():
                 EC.presence_of_element_located(("link text", "More"))
             )
             driver.execute_script("arguments[0].click();", more)
-    elements = WebDriverWait(driver, 10).until(
-        EC.presence_of_all_elements_located((By.XPATH, "//input"))
-    )
+    elements = driver.find_elements(By.XPATH, "//input")
 
     ticker_inputs = []
     allocation_inputs = []
-    print("\n\n\n")
-    print(elements)
-    print("\n\n\n")
     for x in elements:
         if "symbol" in x.get_attribute("name"):
             ticker_inputs.append(x)
