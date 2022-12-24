@@ -81,7 +81,7 @@ def evaulate(ticks):
     arr = ["".join(item) for item in arr.astype(str)]
 
     options = Options()
-    # options.headless = True
+    options.headless = True
     driver = webdriver.Firefox(options=options)
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
