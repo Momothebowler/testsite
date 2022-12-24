@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
-from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 def spyGet():
@@ -79,13 +79,9 @@ def evaulate(ticks):
     arr = ["".join(item) for item in arr.astype(str)]
 
     options = Options()
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--window-size=1920,1080")
     options.add_argument("--headless")
-    driver = webdriver.Chrome(
-        options=options, executable_path=ChromeDriverManager().install()
+    driver = webdriver.Firefox(
+        options=options, executable_path=GeckoDriverManager().install()
     )
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
