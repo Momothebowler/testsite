@@ -11,7 +11,8 @@ WebDriver BiDi listening on ws://127.0.0.1:49493
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofileOAQHhP\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:49493/devtools/browser/c13899e9-4097-42cc-85d9-8b089bd4ee22
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.portfoliovisualizer.com."
-1671903583650	geckodriver	INFO	Listening on 127.0.0.1:55470
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:55470
 1671903586602	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55471" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofile19I0we"
 1671903589158	Marionette	INFO	Marionette enabled
 1671903589166	Marionette	INFO	Listening on port 55507

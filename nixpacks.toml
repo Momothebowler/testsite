@@ -1,6 +1,6 @@
 providers = ["...", "python"]
 [phase.name]
-nixPkgs = ["...","firefox","geckodriver","firefox-bin","firefox-beta-bin"]
+nixPkgs = ["...","firefox-bin"]
 [phases.setup]
 aptPkgs = ["..."]
 
