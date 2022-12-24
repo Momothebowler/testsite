@@ -31,6 +31,7 @@ def evaulate():
     driver = webdriver.Firefox(options=options)
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     if len(ticks) / 10 >= 1:
         for i in range(int(len(ticks) / 10)):
             more = WebDriverWait(driver, 10).until(
