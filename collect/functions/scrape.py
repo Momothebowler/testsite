@@ -90,9 +90,13 @@ def evaulate(ticks):
     driver.refresh()
     if len(ticks) / 10 >= 1:
         for i in range(int(len(ticks) / 10)):
-            more = driver.find_element("link text", "More")
+            more = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located(("link text", "More"))
+            )
             driver.execute_script("arguments[0].click();", more)
-    elements = driver.find_elements(By.XPATH, "//input")
+    elements = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//input"))
+    )
 
     ticker_inputs = []
     allocation_inputs = []
