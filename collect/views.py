@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 
 # from collect.functions.scrape import getSpy
-from collect.functions.scrape import spyGet, evaulate
+from collect.functions.scrape import evaulate
 
 
 def collect(request):
