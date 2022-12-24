@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
 from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.firefox.service import Service as FirefoxService
 
 
 def spyGet():
@@ -81,7 +82,7 @@ def evaulate(ticks):
     options = Options()
     options.add_argument("--headless")
     driver = webdriver.Firefox(
-        options=options, executable_path=GeckoDriverManager().install()
+        options=options, service=FirefoxService(GeckoDriverManager().install())
     )
 
     driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
