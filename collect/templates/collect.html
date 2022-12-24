@@ -46,9 +46,9 @@
                 <form id="post-form">
                     {% csrf_token %}
 
-                    <div class="container">
+                    <section>
+                        <div class="container">
 
-                        <form>
                             <div class="step step-1 active">
                                 <div class="form-group">
                                     <label for="firstName">First Name</label>
@@ -92,12 +92,11 @@
                                     <input type="text" id="postCode" name="postCode">
                                 </div>
                                 <button type="button" class="previous-btn">Previous</button>
-                                <button type="submit" class="submit-btn">Submit</button>
+
                             </div>
 
-                        </form>
-                    </div>
-
+                        </div>
+                    </section>
 
                     <input id="create-btn" name="create-btn" type="submit" />
                     <div name="name" id="name"></div>
