@@ -43,10 +43,11 @@ def evaulate():
     for x in range(len(ticks)):
         ticker_inputs[x].send_keys(ticks[x])
         allocation_inputs[x].send_keys(arr[x])
-
+    del ticker_inputs
+    del allocation_inputs
     optimize = driver.find_element(By.ID, "submitButton")
     driver.execute_script("arguments[0].click();", optimize)
-
+    del optimize
     # /html/body/div[1]/div[6]/div[1]/div[2]/div[2]/div/div[1]/table/tbody
     # Above is Full XPATH
     # Below is XPATH
