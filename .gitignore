@@ -3,3 +3,5 @@ Notes
 __pycache__
 env
 *.log
+*.log
+geckodriver.log

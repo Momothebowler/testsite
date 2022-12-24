@@ -95,7 +95,7 @@ def evaulate(ticks):
             )
             driver.execute_script("arguments[0].click();", more)
     elements = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//input"))
+        EC.presence_of_all_elements_located((By.XPATH, "//input"))
     )
 
     ticker_inputs = []

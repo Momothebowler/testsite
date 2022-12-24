@@ -70,3 +70,14 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 DevTools listening on ws://127.0.0.1:62665/devtools/browser/a42e0bb1-2d80-48f9-a3cd-46ebc9c6cf0d
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.portfoliovisualizer.com."
 1671904036774	Marionette	INFO	Stopped listening on port 62685
+1671907775652	geckodriver	INFO	Listening on 127.0.0.1:58417
+1671907778722	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "58418" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofilennhf9o"
+*** You are running in headless mode.
+1671907780415	Marionette	INFO	Marionette enabled
+1671907780420	Marionette	INFO	Listening on port 58432
+Read port: 58432
+WebDriver BiDi listening on ws://127.0.0.1:58418
+1671907780513	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\momot\\AppData\\Local\\Temp\\rust_mozprofilennhf9o\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58418/devtools/browser/29d58691-2611-48ab-867a-edeab04308d7
