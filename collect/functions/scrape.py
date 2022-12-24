@@ -81,7 +81,6 @@ def evaulate(ticks):
     arr = ["".join(item) for item in arr.astype(str)]
 
     options = Options()
-    options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
     options.headless = True
     driver = webdriver.Firefox(
         options=options, service=FirefoxService(GeckoDriverManager().install())
