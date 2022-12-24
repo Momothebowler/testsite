@@ -1,7 +1,7 @@
 providers = ["...", "python"]
 
 [phases.setup]
-nixPkgs = ["chromium"]
+nixPkgs = ["...", "google-chrome", "chromedriver",]
 aptPkgs = ["..."]
 
 
