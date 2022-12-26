@@ -37,6 +37,14 @@ def evaulate(request):
         data=data,
     )
     tree = html.fromstring(page.content)
+    message = ""
+    try:
+        message = tree.xpath("/html/body/div[1]/div[3]")
+        message = etree.tostring(message[0])
+        message = re.findall("</b>(.*?)\n", message.decode("utf-8"))
+    except:
+        pass
+
     trs = tree.xpath("/html/body/div[1]/div[6]/div[1]/div[2]/div[2]/div/div[1]/table")
     e = etree.tostring(trs[0])
 
@@ -50,4 +58,4 @@ def evaulate(request):
 
     df = pd.DataFrame(tickers, columns=["Tickers"])
     df["Percents"] = percent
-    return df
+    return df, message

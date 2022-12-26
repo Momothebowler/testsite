@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 
 # from collect.functions.scrape import getSpy
 from collect.functions.scrape import evaulate
+import json
 
 
 def collect(request):
@@ -10,7 +11,7 @@ def collect(request):
 
 def create(request):
     if request.method == "POST":
-        df = evaulate(request)  # tickers)
+        df, message = evaulate(request)  # tickers)
         # mydict = {
         #    "df": df.to_html(
         #        float_format=lambda x: "%10.2f" % x,
@@ -28,4 +29,8 @@ def create(request):
             justify="center",
             col_space="38.25px",
         )
-        return HttpResponse(df)
+        data = {
+            "df": df,
+            "message": message,
+        }
+        return HttpResponse(json.dumps(data))

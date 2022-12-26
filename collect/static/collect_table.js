@@ -14,8 +14,9 @@ $(document).on('submit', '#post-form', function (e) {
         url: 'create',
         data: data,
         success: function (data) {
-            $('#name').html(data);
-            console.log($("#create-btn"))
+            var data_obj = JSON.parse(data)
+            $('#name').html(data_obj.df);
+            $('#notice').html('<h3>'.concat(data_obj.message[0]).concat('</h3>'));
         }
     });
 });

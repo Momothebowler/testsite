@@ -10,6 +10,11 @@ function addInput() {
     var element = document.getElementsByClassName('inp-group');
     var count = element[0].childElementCount;
 
+    const num = document.createElement("label");
+    num.id = String(count + 1)
+    num.textContent = String(count + 1).concat(". ")
+    num.name = "label"
+
     const name = document.createElement("input");
     name.type = "text";
     name.id = "symbol".concat(parseInt(count + 1))
@@ -25,6 +30,7 @@ function addInput() {
     flex.className = "form-group";
 
     input.appendChild(flex);
+    flex.appendChild(num)
     flex.appendChild(name);
     flex.appendChild(btn);
 }
