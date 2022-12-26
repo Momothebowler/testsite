@@ -10,34 +10,26 @@ import re
 import pandas as pd
 
 
-def evaulate():
-    tickers = [
-        "TSLA",
-        "AMZN",
-        "AAPL",
-        "GOOG",
-        "NOK",
-        "BBBY",
-        "GME",
-        "QQQ",
-        "TQQQ",
-        "AMC",
-        "BB",
-    ]
-    ticks = tickers
-    arr = np.full(
-        shape=len(ticks), fill_value=round((100 / len(ticks)), 2), dtype=np.float16
-    )
-    total = round(round((100 / len(ticks)), 2) * len(ticks), 2)
-    if total < 100:
-        arr[0] += round(100 - total, 2)
-    elif total > 100:
-        arr[0] = round(arr[0] - (total - 100), 2)
-    arr = ["".join(item) for item in arr.astype(str)]
+def evaulate(request):
+    count = int(request.POST["count"])
+    ticks = []
+    for x in range(count):
+        ticks.append(request.POST["symbol" + str(x + 1)])
 
+    arr = np.full(
+        shape=len(ticks),
+        fill_value="{:.2f}".format(100 / len(ticks)),
+        dtype=np.single,
+    )
+    sum = np.sum(arr)
+    if sum > 100:
+        arr[0] = round(arr[0] - (sum - 100), 2)
+    elif sum < 100:
+        arr[0] = round(arr[0] + (100 - sum), 2)
+    arr = ["".join(item) for item in arr.astype(str)]
     data = {}
-    for x in range(len(tickers)):
-        data["symbol" + str(x + 1)] = tickers[x]
+    for x in range(len(ticks)):
+        data["symbol" + str(x + 1)] = ticks[x]
         data["allocation" + str(x + 1) + "_1"] = arr[x]
     url = " https://www.portfoliovisualizer.com/optimize-portfolio"
     page = requests.post(
@@ -45,10 +37,8 @@ def evaulate():
         data=data,
     )
     tree = html.fromstring(page.content)
-    trs = tree.xpath(
-        "/html/body/div[1]/div[6]/div[1]/div[2]/div[2]/div/div[1]/table/tbody"
-    )
-    e = etree.tostring(trs[0], pretty_print=True)
+    trs = tree.xpath("/html/body/div[1]/div[6]/div[1]/div[2]/div[2]/div/div[1]/table")
+    e = etree.tostring(trs[0])
 
     ticker = re.findall("<td>(.*?)</td>", str(e))
     percent = re.findall('<td class="numberCell">(.*?)</td>', str(e))

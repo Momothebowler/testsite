@@ -7,8 +7,12 @@ function removeInput() {
 }
 
 function addInput() {
+    var element = document.getElementsByClassName('inp-group');
+    var count = element[0].childElementCount;
+
     const name = document.createElement("input");
     name.type = "text";
+    name.id = "symbol".concat(parseInt(count + 1))
     name.placeholder = "Enter a stock";
 
     const btn = document.createElement("a");
