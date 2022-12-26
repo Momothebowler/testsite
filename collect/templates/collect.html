@@ -48,58 +48,22 @@
 
                     <section>
                         <div class="container">
-
-                            <div class="step step-1 active">
-                                <div class="form-group">
-                                    <label for="firstName">First Name</label>
-                                    <input type="text" id="firstName" name="firstName">
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name</label>
-                                    <input type="text" id="lastName" name="lastName">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nickName">Nick Name</label>
-                                    <input type="text" id="nickName" name="nickName">
-                                </div>
-                                <button type="button" class="next-btn">Next</button>
+                            <div class="wrap">
+                                <h2> Pick your tickers!</h2>
+                                <button type="button" class="add">&plus;</button>
                             </div>
 
-                            <div class="step step-2">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="number" id="phone" name="phone-number">
-                                </div>
-                                <button type="button" class="previous-btn">Previous</button>
-                                <button type="button" class="next-btn">Next</button>
-                            </div>
-
-                            <div class="step step-3">
-                                <div class="form-group">
-                                    <label for="country">County</label>
-                                    <input type="text" id="country" name="country">
-                                </div>
-                                <div class="form-group">
-                                    <label for="city">City</label>
-                                    <input type="text" id="city" name="city">
-                                </div>
-                                <div class="form-group">
-                                    <label for="postCode">Post Code</label>
-                                    <input type="text" id="postCode" name="postCode">
-                                </div>
-                                <button type="button" class="previous-btn">Previous</button>
+                            <div class="inp-group">
 
                             </div>
-
+                            <input id="create-btn" name="create-btn" type="submit" />
+                            <div name="name" id="name"></div>
                         </div>
+
+
                     </section>
 
-                    <input id="create-btn" name="create-btn" type="submit" />
-                    <div name="name" id="name"></div>
+
                     <!--<input type="submit" value={{x}} name="mybtn" id="start_submit" class="btn btn-success" />
                   <div style="width: 10%;margin-left: 75px;">
                     {{df|safe}}
@@ -120,5 +84,6 @@
     </div>
 </body>
 <script type="text/javascript" src="{% static 'collect_table.js' %}"></script>
+<script type="text/javascript" src="{% static 'moreButton.js' %}"></script>
 
 </html>

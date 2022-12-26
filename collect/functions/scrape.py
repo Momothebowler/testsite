@@ -8,13 +8,27 @@ from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
 
-from selenium.webdriver.firefox.options import Options
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.firefox.service import Service as FirefoxService
+import requests
+import bs4
+from lxml import html, etree
+import re
+import pandas as pd
 
 
 def evaulate():
-    tickers = ["TSLA", "AMZN", "AAPL", "GOOG", "NOK", "BBBY", "GME"]
+    tickers = [
+        "TSLA",
+        "AMZN",
+        "AAPL",
+        "GOOG",
+        "NOK",
+        "BBBY",
+        "GME",
+        "QQQ",
+        "TQQQ",
+        "AMC",
+        "BB",
+    ]
     ticks = tickers
     arr = np.full(
         shape=len(ticks), fill_value=round((100 / len(ticks)), 2), dtype=np.float16
@@ -26,47 +40,23 @@ def evaulate():
         arr[0] = round(arr[0] - (total - 100), 2)
     arr = ["".join(item) for item in arr.astype(str)]
 
-    options = Options()
-    options.headless = True
-    driver = webdriver.Firefox(options=options)
-
-    driver.get("https://www.portfoliovisualizer.com/optimize-portfolio")
-    if len(ticks) / 10 >= 1:
-        for i in range(int(len(ticks) / 10)):
-            more = WebDriverWait(driver, 2).until(
-                EC.presence_of_element_located(("link text", "More"))
-            )
-            driver.execute_script("arguments[0].click();", more)
-    ticker_inputs = driver.find_elements(By.CSS_SELECTOR, ("[name^=symbol]"))
-    allocation_inputs = driver.find_elements(By.CSS_SELECTOR, ("[name^=allocation]"))
-
-    for x in range(len(ticks)):
-        ticker_inputs[x].send_keys(ticks[x])
-        allocation_inputs[x].send_keys(arr[x])
-    del ticker_inputs
-    del allocation_inputs
-    optimize = driver.find_element(By.ID, "submitButton")
-    driver.execute_script("arguments[0].click();", optimize)
-    del optimize
-    # /html/body/div[1]/div[6]/div[1]/div[2]/div[2]/div/div[1]/table/tbody
-    # Above is Full XPATH
-    # Below is XPATH
-    # //*[@id="growthChart"]/div[2]/div[2]/div/div[1]/table/tbody
-    output = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
-            (
-                By.XPATH,
-                "/html/body/div[1]/div[6]/div[1]/div[2]/div[2]/div/div[1]/table/tbody",
-            )
-        )
+    data = {}
+    for x in range(len(tickers)):
+        data["symbol" + str(x + 1)] = tickers[x]
+        data["allocation" + str(x + 1) + "_1"] = arr[x]
+    url = " https://www.portfoliovisualizer.com/optimize-portfolio"
+    page = requests.post(
+        url,
+        data=data,
     )
-    output = output.get_attribute("innerHTML")
-    driver.quit()
+    tree = html.fromstring(page.content)
+    trs = tree.xpath(
+        "/html/body/div[1]/div[6]/div[1]/div[2]/div[2]/div/div[1]/table/tbody"
+    )
+    e = etree.tostring(trs[0], pretty_print=True)
 
-    ticker = re.findall("<td>(.*?)</td>", str(output))
-    percent = re.findall('<td class="numberCell">(.*?)</td>', str(output))
-    # for i in output.get_attribute("innerHTML").replace("</td>", "<td>").split("<td>"):
-    #    print(i)
+    ticker = re.findall("<td>(.*?)</td>", str(e))
+    percent = re.findall('<td class="numberCell">(.*?)</td>', str(e))
 
     tickers = []
     for i in range(len(ticker)):
