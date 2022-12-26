@@ -1,15 +1,10 @@
 import requests
 import lxml.html as lh
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
 import re
 
 import requests
-import bs4
 from lxml import html, etree
 import re
 import pandas as pd
