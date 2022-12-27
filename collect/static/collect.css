@@ -223,3 +223,11 @@ section {
 label {
     cursor: text;
 }
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+}

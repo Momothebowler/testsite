@@ -1,14 +1,14 @@
 const addBtn = document.querySelector(".add");
 
-const input = document.querySelector(".inp-group");
 
 function removeInput() {
     this.parentElement.remove();
 }
 
 function addInput() {
-    var element = document.getElementsByClassName('inp-group');
-    var count = element[0].childElementCount;
+    var element = document.querySelector('form .step.active').querySelector(".inp-group")
+    var count = element.childElementCount;
+    var index_string = document.querySelector('form .step.active').className.split(" ")[1]
 
     const num = document.createElement("label");
     num.id = String(count + 1)
@@ -17,8 +17,15 @@ function addInput() {
 
     const name = document.createElement("input");
     name.type = "text";
-    name.id = "symbol".concat(parseInt(count + 1))
-    name.placeholder = "Enter a stock";
+    if (index_string === "step-1") {
+        name.id = "symbol".concat(parseInt(count + 1))
+        name.placeholder = "Enter a stock";
+    }
+    else if (index_string === "step-2") {
+        name.id = "Allocation".concat(parseInt(count + 1)).concat("-1")
+        name.placeholder = "Stock ".concat(String(count + 1)).concat(" Allocation");
+    }
+
 
     const btn = document.createElement("a");
     btn.className = "delete";
@@ -29,7 +36,7 @@ function addInput() {
     const flex = document.createElement("div");
     flex.className = "form-group";
 
-    input.appendChild(flex);
+    element.appendChild(flex);
     flex.appendChild(num)
     flex.appendChild(name);
     flex.appendChild(btn);

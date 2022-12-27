@@ -1,13 +1,12 @@
-$(document).on('submit', '#post-form', function (e) {
-    document.getElementById("create-btn").style.display = "none";
+$('#post-form').submit(function (e) {
     e.preventDefault();
-    data = {}
-    data['csrfmiddlewaretoken'] = $('[name=csrfmiddlewaretoken]').val()
-    var element = document.getElementsByClassName('inp-group');
-    var count = element[0].childElementCount;
+    document.getElementById("table-btn").style.display = "none";
+    data = {};
+    data['csrfmiddlewaretoken'] = $('[name=csrfmiddlewaretoken]').val();
+    var count = document.querySelector('form .step-1').querySelector(".inp-group").childElementCount;
     data['count'] = count
-    for (let x = 1; x <= count + 1; x++) {
-        data['symbol'.concat(parseInt(x))] = $('#symbol'.concat(parseInt(x))).val()
+    for (let x = 1; x <= count; x++) {
+        data['symbol'.concat(parseInt(x))] = $('#symbol'.concat(parseInt(x))).val();
     }
     $.ajax({
         type: 'POST',
@@ -15,8 +14,10 @@ $(document).on('submit', '#post-form', function (e) {
         data: data,
         success: function (data) {
             var data_obj = JSON.parse(data)
-            $('#name').html(data_obj.df);
+            $("div[name='name']").html("");
+            $("div[name='name']").html(data_obj.df);
             $('#notice').html('<h3>'.concat(data_obj.message[0]).concat('</h3>'));
+            document.getElementById("table-btn").style.display = "";
         }
     });
 });
