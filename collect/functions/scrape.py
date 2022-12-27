@@ -11,22 +11,25 @@ import pandas as pd
 
 
 def evaulate(request):
-    count = int(request.POST["count"])
     ticks = []
-    for x in range(count):
+    arr = []
+    for x in range(int(request.POST["count1"])):
         ticks.append(request.POST["symbol" + str(x + 1)])
-
-    arr = np.full(
-        shape=len(ticks),
-        fill_value="{:.2f}".format(100 / len(ticks)),
-        dtype=np.single,
-    )
-    sum = np.sum(arr)
-    if sum > 100:
-        arr[0] = round(arr[0] - (sum - 100), 2)
-    elif sum < 100:
-        arr[0] = round(arr[0] + (100 - sum), 2)
-    arr = ["".join(item) for item in arr.astype(str)]
+    if "Allocation2_1" in request.POST:
+        for x in range(int(request.POST["count2"])):
+            arr.append(request.POST["Allocation" + str(x + 1) + "_1"])
+    else:
+        arr = np.full(
+            shape=len(ticks),
+            fill_value="{:.2f}".format(100 / len(ticks)),
+            dtype=np.single,
+        )
+        sum = np.sum(arr)
+        if sum > 100:
+            arr[0] = round(arr[0] - (sum - 100), 2)
+        elif sum < 100:
+            arr[0] = round(arr[0] + (100 - sum), 2)
+        arr = ["".join(item) for item in arr.astype(str)]
     data = {}
     for x in range(len(ticks)):
         data["symbol" + str(x + 1)] = ticks[x]

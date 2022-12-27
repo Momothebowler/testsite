@@ -22,7 +22,7 @@ function addInput() {
         name.placeholder = "Enter a stock";
     }
     else if (index_string === "step-2") {
-        name.id = "Allocation".concat(parseInt(count + 1)).concat("-1")
+        name.id = "Allocation".concat(parseInt(count + 1)).concat("_1")
         name.placeholder = "Stock ".concat(String(count + 1)).concat(" Allocation");
     }
 
