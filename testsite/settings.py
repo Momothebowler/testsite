@@ -34,6 +34,9 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "home",
     "portfolio",
+    "about",
+    "questions",
+    "collect",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -52,6 +55,11 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://testsite-production.up.railway.app",
+    "https://mainsite-production.up.railway.app",
 ]
 
 ROOT_URLCONF = "testsite.urls"

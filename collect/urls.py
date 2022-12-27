@@ -2,8 +2,8 @@ from django.urls import path, include
 
 from . import views
 
-app_name = "portfolio"
+app_name = "collect"
 urlpatterns = [
-    path("", views.portfolio, name="portfolio"),
+    path("", views.collect, name="collect"),
     path("create", views.create, name="create"),
 ]

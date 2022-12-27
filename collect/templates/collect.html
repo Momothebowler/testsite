@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'collect.css' %}" />
+    <script src="{% static 'dropdown.js' %}"></script>
+</head>
+
+
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+            <div style="background-color:white;padding-top: 1px;padding-bottom: 1px;">
+                <h2 style="font-family: Garamond, serif;margin-left: 20px;">Kibler Strategies
+                </h2>
+            </div>
+            <div class="topnav">
+                &nbsp; &nbsp; &nbsp;
+                <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
+                <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
+                <a href="{% url 'about:about' %}">About</a>
+                <a href="{% url 'questions:questions' %}">Quest</a>
+                <a href="{% url 'collect:collect' %}">Collect</a>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="drop()">Dropdown
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content" id="myDropdown">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+
+            <form id="post-form">
+                {% csrf_token %}
+
+                <section style="padding-bottom: 50px;">
+                    <div class="container">
+                        <div class="wrap">
+                            <h2> Pick your tickers!</h2>
+                            <button type="button" class="add">&plus;</button>
+                        </div>
+                        <div name="notice" id="notice"></div>
+
+                        <div class="step step-1 active">
+                            <div class="inp-group">
+                                <div class="form-group">
+                                    <label id="1">1. </label>
+                                    <input type="text" id="symbol1" placeholder="Enter a stock">
+                                    <a class="delete">×</a>
+                                </div>
+                                <div class="form-group">
+                                    <label id="2">2. </label>
+                                    <input type="text" id="symbol2" placeholder="Enter a stock">
+                                    <a class="delete">×</a>
+                                </div>
+                                <div class="form-group">
+                                    <label id="3">3. </label>
+                                    <input type="text" id="symbol3" placeholder="Enter a stock">
+                                    <a class="delete">×</a>
+                                </div>
+                            </div>
+                            <button type="button" class="next-btn">Next</button>
+                            <div name="name" id="name" style="display: flex; justify-content: center;"></div>
+                        </div>
+                        <div class="step step-2">
+                            <div class="inp-group"></div>
+                            <button type="button" class="previous-btn">Previous</button>
+                            <button type="button" class="next-btn">Next</button>
+                            <div name="name" id="name" style="display: flex; justify-content: center;"></div>
+                        </div>
+                        <div class="step step-3">
+                            <div class="inp-group"></div>
+                            <button type="button" class="previous-btn">Previous</button>
+                            <div name="name" id="name" style="display: flex; justify-content: center;"></div>
+                        </div>
+                        <input id="table-btn" name="table-btn" type="submit" />
+                    </div>
+
+
+                </section>
+
+
+                <!--<input type="submit" value={{x}} name="mybtn" id="start_submit" class="btn btn-success" />
+                  <div style="width: 10%;margin-left: 75px;">
+                    {{df|safe}}
+                  </div>-->
+            </form>
+        </div>
+
+        <footer id="footer" class="footer">
+            <p>
+                Kibler Strategies 2022
+            </p>
+        </footer>
+    </div>
+
+</body>
+<script type="text/javascript" src="{% static 'collect_table.js' %}"></script>
+<script type="text/javascript" src="{% static 'moreButton.js' %}"></script>
+<script type="text/javascript" src="{% static 'collect_quest.js' %}"></script>
+
+</html>
