@@ -175,8 +175,10 @@ section {
     padding: 8px 10px;
     background: #ddd;
     border: none;
-    width: 80%;
+    width: 50%;
     border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .form-group input:focus {

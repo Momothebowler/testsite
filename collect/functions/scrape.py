@@ -14,11 +14,9 @@ def evaulate(request):
     ticks = []
     arr = []
     for x in range(int(request.POST["count1"])):
-        ticks.append(request.POST["symbol" + str(x + 1)])
-    if "Allocation2_1" in request.POST:
-        for x in range(int(request.POST["count2"])):
+        if request.POST["symbol" + str(x + 1)] != "":
+            ticks.append(request.POST["symbol" + str(x + 1)])
             arr.append(request.POST["Allocation" + str(x + 1) + "_1"])
-    else:
         arr = np.full(
             shape=len(ticks),
             fill_value="{:.2f}".format(100 / len(ticks)),

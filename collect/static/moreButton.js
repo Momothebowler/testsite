@@ -21,11 +21,13 @@ function addInput() {
         name.id = "symbol".concat(parseInt(count + 1))
         name.placeholder = "Enter a stock";
     }
-    else if (index_string === "step-2") {
-        name.id = "Allocation".concat(parseInt(count + 1)).concat("_1")
-        name.placeholder = "Stock ".concat(String(count + 1)).concat(" Allocation");
-    }
 
+    const name2 = document.createElement("input");
+    name.type = "text";
+    if (index_string === "step-1") {
+        name2.id = "Allocation".concat(parseInt(count + 1)).concat("_1")
+        name2.placeholder = "Stock ".concat(String(count + 1)).concat(" Allocation");
+    }
 
     const btn = document.createElement("a");
     btn.className = "delete";
@@ -39,6 +41,7 @@ function addInput() {
     element.appendChild(flex);
     flex.appendChild(num)
     flex.appendChild(name);
+    flex.appendChild(name2);
     flex.appendChild(btn);
 }
 
