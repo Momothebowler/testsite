@@ -1,0 +1,13 @@
+Learn to spell scrape properly
+
+Look at my current folder "spy" for an example
+
+scapre simple text and paste it on site
+Use this as a way to test how fast it can be
+
+Then work on inputting data and getting a response
+Might be worth making a separate project folder for this
+
+Need to use WebDriverWait
+
+HOW THE HECK DO WE USE SELENIUM ON RAILWAY

@@ -51,52 +51,41 @@
                         <div class="wrap">
                             <h2> Pick your tickers!</h2>
                             <button type="button" class="add">&plus;</button>
+                            <div>
+                                <h3>h</h3>
+                            </div>
                         </div>
-                        <div name="notice" id="notice"></div>
 
                         <div class="step step-1 active">
                             <div class="inp-group">
                                 <div class="form-group">
                                     <label id="1">1. </label>
                                     <input type="text" id="symbol1" placeholder="Enter a stock">
-                                    <a class="delete">×</a>
+                                    <input id="Allocation1_1" placeholder="Stock 1 Allocation" type="number" min="0" max="100">
                                 </div>
                                 <div class="form-group">
                                     <label id="2">2. </label>
                                     <input type="text" id="symbol2" placeholder="Enter a stock">
-                                    <a class="delete">×</a>
+                                    <input id="Allocation2_1" placeholder="Stock 2 Allocation" type="number" min="0" max="100" onkeyup="addRow(this)">
                                 </div>
                                 <div class="form-group">
                                     <label id="3">3. </label>
-                                    <input type="text" id="symbol3" placeholder="Enter a stock">
-                                    <a class="delete">×</a>
+                                    <input type="text" id="symbol3" placeholder="Enter a stock" disabled="disabled">
+                                    <input id="Allocation3_1" placeholder="Stock 3 Allocation" type="number" min="10" max="100" disabled="disabled">
                                 </div>
                             </div>
-                            <button type="button" class="next-btn">Next</button>
                             <div name="name" id="name" style="display: flex; justify-content: center;"></div>
                         </div>
-                        <div class="step step-2">
-                            <div class="inp-group"></div>
-                            <button type="button" class="previous-btn">Previous</button>
-                            <button type="button" class="next-btn">Next</button>
-                            <div name="name" id="name" style="display: flex; justify-content: center;"></div>
+                        <div id="myProgress" style="display:none">
+                            <div id="myBar"></div>
                         </div>
-                        <div class="step step-3">
-                            <div class="inp-group"></div>
-                            <button type="button" class="previous-btn">Previous</button>
-                            <div name="name" id="name" style="display: flex; justify-content: center;"></div>
-                        </div>
-                        <input id="table-btn" name="table-btn" type="submit" />
+                        <input id="table-btn" name="table-btn" type="submit" disabled="disabled" onclick="move()"/>
+
                     </div>
 
 
                 </section>
 
-
-                <!--<input type="submit" value={{x}} name="mybtn" id="start_submit" class="btn btn-success" />
-                  <div style="width: 10%;margin-left: 75px;">
-                    {{df|safe}}
-                  </div>-->
             </form>
         </div>
 
@@ -111,5 +100,6 @@
 <script type="text/javascript" src="{% static 'collect_table.js' %}"></script>
 <script type="text/javascript" src="{% static 'moreButton.js' %}"></script>
 <script type="text/javascript" src="{% static 'collect_quest.js' %}"></script>
+<script type="text/javascript" src="{% static 'grey_out.js' %}"></script>
 
 </html>

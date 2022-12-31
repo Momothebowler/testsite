@@ -1,0 +1,4 @@
+If Desired:
+To have the table toggle:
+    Check if the div is empty of not ("")
+    If it isn't, then return the HttpResponse as ""

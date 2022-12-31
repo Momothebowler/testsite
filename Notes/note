@@ -1,0 +1,18 @@
+Could hold the sheets in memory over downloading 
+until we have a db or server dedicated to the site.
+
+Turn df creation into a function to be called by a button
+
+Text boxes to edit stock choices
+Text boxes to change date range
+
+
+Scrape the site and try to put it on our site.
+
+
+We are reusing the same static files in apps so
+put them into staticfiles folder for global access
+if possible
+
+
+CSRF_TRUSTED_ORIGINS needs to be updated when we get domains, etc
