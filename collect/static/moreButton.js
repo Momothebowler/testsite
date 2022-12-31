@@ -27,6 +27,9 @@ function addInput() {
     if (index_string === "step-1") {
         name2.id = "Allocation".concat(parseInt(count + 1)).concat("_1")
         name2.placeholder = "Stock ".concat(String(count + 1)).concat(" Allocation");
+        name2.type = "number"
+        name2.min = "0"
+        name2.max = "100"
     }
 
     const btn = document.createElement("a");

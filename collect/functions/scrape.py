@@ -30,7 +30,6 @@ def evaulate(request):
         if request.POST["symbol" + str(q + 1)] != "":
             ticks.append(request.POST["symbol" + str(q + 1)].upper())
             arr.append(int(request.POST["Allocation" + str(q + 1) + "_1"]))
-        print(arr)
     # if typed allocations dont sum to 100%, sets all of them to about equal
     if sum(arr) != 100:
         arr = np.full(
@@ -56,20 +55,26 @@ def evaulate(request):
 
     today = datetime.date.today()
     year = int(today.year)
+    earliestYear = 1985
+    earliestMonth = 1
 
     x = 1
     while x <= 20:
 
         print("loop: " + str(x))
         x += 1
-
-        startYear = random.randint(1985, year - 1)
+        print(earliestYear)
+        print(year - 1)
+        startYear = random.randint(earliestYear, year - 1)
         endYear = random.randint(startYear + 1, year)
         data["startYear"] = startYear
         data["endYear"] = endYear
 
-        randMon1 = random.randint(1, 12 - 1)
-        randMon2 = random.randint(randMon1 + 1, 12)
+        if startYear == earliestYear:
+            randMon1 = random.randint(earliestMonth, 12)
+        else:
+            randMon1 = random.randint(1, 12)
+            randMon2 = random.randint(randMon1, 12)
 
         data["firstMonth"] = randMon1
         data["lastMonth"] = randMon2
@@ -85,9 +90,31 @@ def evaulate(request):
         message = ""
 
         # gets any update message (might need a sooner time period)
-        message = tree.xpath("/html/body/div[1]/div[3]")
-        message = etree.tostring(message[0])
-        message = re.findall("</b>(.*?)\n", message.decode("utf-8"))
+        try:
+            message = tree.xpath("/html/body/div[1]/div[3]")
+            message = etree.tostring(message[0])
+            message3 = None
+            try:
+                message3 = re.findall(
+                    "<div class='alert alert-danger''>(.*?)</div>",
+                    message.decode("utf-8"),
+                )
+            except:
+                pass
+            if message3 == None or message3 == []:
+                message = re.findall("</b>(.*?)\n", message.decode("utf-8"))
+            else:
+                x -= 1
+                continue
+            if message != []:
+                message2 = re.findall("\[(.*?) -", message[0])[0].split(" ")
+                earliestYear = int(message2[1])
+                earliestMonth = int(datetime.datetime.strptime(message2[0], "%b").month)
+        except Exception as e:
+            print(e)
+            print(data)
+            x -= 1
+            continue
 
         # gets the maximum sharpe ratio table
         trs = tree.xpath("//*[@id='growthChart']/div[2]/div[2]/div/div[1]/table")
@@ -95,6 +122,7 @@ def evaulate(request):
         try:
             # Parses table data into tickers and %'s
             e = etree.tostring(trs[0])
+
             ticker = re.findall("<td>(.*?)</td>", str(e))
             tickers = []
             for i in range(len(ticker)):
@@ -159,4 +187,4 @@ def evaulate(request):
     df.index.name = 0
     df.columns.name = timePer
     df.index.name = None
-    return df, message
+    return df

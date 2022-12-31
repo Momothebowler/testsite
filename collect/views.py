@@ -11,7 +11,7 @@ def collect(request):
 
 def create(request):
     if request.method == "POST":
-        df, message = evaulate(request)  # tickers)
+        df = evaulate(request)  # tickers)
         # mydict = {
         #    "df": df.to_html(
         #        float_format=lambda x: "%10.2f" % x,
@@ -31,6 +31,5 @@ def create(request):
         )
         data = {
             "df": df,
-            "message": message,
         }
         return HttpResponse(json.dumps(data))

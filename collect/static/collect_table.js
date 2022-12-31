@@ -1,6 +1,7 @@
 $('#post-form').submit(function (e) {
     e.preventDefault();
     document.getElementById("table-btn").style.display = "none";
+    document.getElementById("myProgress").style.display = "block"
     data = {};
     data['csrfmiddlewaretoken'] = $('[name=csrfmiddlewaretoken]').val();
     var count1 = document.querySelector('form .step-1').querySelector(".inp-group").childElementCount;
@@ -17,8 +18,27 @@ $('#post-form').submit(function (e) {
             var data_obj = JSON.parse(data)
             $("div[name='name']").html("");
             $("div[name='name']").html(data_obj.df);
-            $('#notice').html('<h3>'.concat(data_obj.message[0]).concat('</h3>'));
             document.getElementById("table-btn").style.display = "";
+            document.getElementById("myProgress").style.display = "none";
         }
     });
 });
+
+var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 200);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
