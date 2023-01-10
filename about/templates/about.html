@@ -6,10 +6,10 @@
     <title>Home</title>
     <link rel="icon" href="{% static 'favicon.ico' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'about.css' %}" />
     <script src="{% static 'dropdown.js' %}"></script>
-
 </head>
 
 
@@ -17,27 +17,10 @@
     <div id="page-container">
         <div id="content-wrap">
             <h2 style="font-family: Garamond, serif;margin-left: 20px;">Kibler Strategies</h2>
-            <div class="topnav">
-                <a href="{% url 'home:home' %}" style="margin-left: 5px;">Home</a>
-                <a href="{% url 'portfolio:portfolio' %}">Portfolio</a>
-                <a href="{% url 'about:about' %}">About</a>
-                <a href="{% url 'questions:questions' %}">Quest</a>
-                <a href="{% url 'collect:collect' %}">Collect</a>
-                <div class="dropdown">
-                    <button class="dropbtn" onclick="drop()">Dropdown
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content" id="myDropdown">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-                <div class="search-container">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
+            {% include 'navbar.html' %}
+            {% block content %}{% endblock %}
+            
+
 
             <section style="min-height: 100vh;width: 100%; background-color: aliceblue;">
                 <div>
