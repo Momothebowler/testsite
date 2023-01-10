@@ -1,1 +1,1 @@
-web: gunicorn testsite.wsgi --timeout 120
+web: gunicorn testsite.wsgi --timeout 0
