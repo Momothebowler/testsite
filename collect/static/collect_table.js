@@ -20,6 +20,7 @@ $('#post-form').submit(function (e) {
             $("div[name='name']").html(data_obj.df);
             document.getElementById("table-btn").style.display = "";
             document.getElementById("myProgress").style.display = "none";
+            document.getElementById("myBar").style.width = 0 + '%';
         }
     });
 });

@@ -61,10 +61,7 @@ def evaulate(request):
     x = 1
     while x <= 20:
 
-        print("loop: " + str(x))
         x += 1
-        print(earliestYear)
-        print(year - 1)
         startYear = random.randint(earliestYear, year - 1)
         endYear = random.randint(startYear + 1, year)
         data["startYear"] = startYear
