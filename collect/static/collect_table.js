@@ -1,8 +1,9 @@
 $('#post-form').submit(function (e) {
     e.preventDefault();
     document.getElementById("table-btn").style.display = "none";
-    document.getElementById("myProgress").style.display = "block"
+    document.getElementById("myProgress").style.display = "block";
     data = {};
+    data['iters'] = $('#Iterations').val();
     data['csrfmiddlewaretoken'] = $('[name=csrfmiddlewaretoken]').val();
     var count1 = document.querySelector('form .step-1').querySelector(".inp-group").childElementCount;
     data['count1'] = count1

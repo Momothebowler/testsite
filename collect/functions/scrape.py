@@ -59,7 +59,7 @@ def evaulate(request):
     earliestMonth = 1
 
     x = 1
-    while x <= 20:
+    while x <= int(request.POST["iters"]):
 
         x += 1
         startYear = random.randint(earliestYear, year - 1)
