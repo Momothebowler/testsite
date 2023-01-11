@@ -21,13 +21,13 @@ def create(request):
         #        col_space="38.25px",
         #    )
         # }
-        df.index += 1
         df = df.to_html(
             float_format=lambda x: "%10.2f" % x,
             border=3,
             classes="table table-striped text-center",
             justify="center",
             col_space="38.25px",
+            index=False,
         )
         data = {
             "df": df,

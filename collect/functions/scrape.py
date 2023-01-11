@@ -45,6 +45,8 @@ def evaulate(request):
         arr[0] = round(arr[0] + (100 - sums), 2)
         arr = ["".join(item) for item in arr.astype(str)]
 
+    arty = []
+    arty = arty + arr
     # puts the tickers and allocations into a data dict to pass into a post request
     for r in range(len(ticks)):
         data["symbol" + str(r + 1)] = ticks[r]
@@ -179,17 +181,6 @@ def evaulate(request):
 
     # makes our dataframe and passes it back to the ajax request
     df = pd.DataFrame(tickers, columns=["Tickers"])
-    df["Percents"] = percent
-    timePer = (
-        str(data["startYear"])
-        + "-"
-        + str(data["firstMonth"])
-        + " - "
-        + str(data["endYear"])
-        + "-"
-        + str(data["lastMonth"])
-    )
-    df.index.name = 0
-    df.columns.name = timePer
-    df.index.name = None
+    df["Provided"] = arty
+    df["Maximum Sharpe"] = percent
     return df

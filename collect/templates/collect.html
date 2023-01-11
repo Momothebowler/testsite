@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'collect.css' %}" />
     <link rel="stylesheet" href="{% static 'all.css' %}" />
-    
+
     <script src="{% static 'dropdown.js' %}"></script>
 </head>
 
@@ -32,36 +32,46 @@
                     <div class="container">
                         <div class="wrap">
                             <h2> Pick your tickers!</h2>
-                            
+
                         </div>
                         <div>
-                            <h3>Iterations to Perform: </h3> 
-                            <input name = "Iterations" id="Iterations" value="20" type="number" min="1" max="40">
+                            <h3>Iterations to Perform: </h3>
+                            <input name="Iterations" id="Iterations" value="20" type="number" min="1" max="40">
                         </div>
                         <div class="step step-1 active">
                             <div class="inp-group">
                                 <div class="form-group">
                                     <label id="1">1. </label>
                                     <input type="text" id="symbol1" placeholder="Enter a stock">
-                                    <input id="Allocation1_1" placeholder="Stock 1 Allocation" type="number" min="0" max="100">
+                                    <input id="Allocation1_1" placeholder="Stock 1 Allocation" type="number" min="0"
+                                        max="100">
                                 </div>
                                 <div class="form-group">
                                     <label id="2">2. </label>
                                     <input type="text" id="symbol2" placeholder="Enter a stock">
-                                    <input id="Allocation2_1" placeholder="Stock 2 Allocation" type="number" min="0" max="100" onkeyup="addRow(this)">
+                                    <input id="Allocation2_1" placeholder="Stock 2 Allocation" type="number" min="0"
+                                        max="100" onkeyup="addRow(this)">
                                 </div>
                                 <div class="form-group">
                                     <label id="3">3. </label>
                                     <input type="text" id="symbol3" placeholder="Enter a stock" disabled="disabled">
-                                    <input id="Allocation3_1" placeholder="Stock 3 Allocation" type="number" min="10" max="100" disabled="disabled">
+                                    <input id="Allocation3_1" placeholder="Stock 3 Allocation" type="number" min="10"
+                                        max="100" disabled="disabled">
                                 </div>
                             </div>
-                            <div name="name" id="name" style="display: flex; justify-content: center;"></div>
+                            <div id="textbox">
+                                <div name="Table1" id="Table1" class="aligncenter">
+
+                                </div>
+                                <div name="Table2" id="Table2" class="alignleft">
+
+                                </div>
+                            </div>
                         </div>
                         <div id="myProgress" style="display:none">
                             <div id="myBar"></div>
                         </div>
-                        <input id="table-btn" name="table-btn" type="submit" disabled="disabled" onclick="move()"/>
+                        <input id="table-btn" name="table-btn" type="submit" disabled="disabled" onclick="move()" />
 
                     </div>
 

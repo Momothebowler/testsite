@@ -1,4 +1,4 @@
-body{
+body {
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -10,6 +10,7 @@ body{
     min-width: 100%;
     background-color: aliceblue;
 }
+
 .container {
     min-width: 750px;
     max-width: 1000px;
@@ -107,10 +108,30 @@ label {
 #myProgress {
     width: 100%;
     background-color: grey;
-  }
-  
+}
+
 #myBar {
     width: 1%;
     height: 30px;
     background-color: green;
-  }
+}
+
+#textbox {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.alignleft {
+    width: 33.33333%;
+    text-align: left;
+}
+
+.aligncenter {
+    width: 33.33333%;
+    text-align: center;
+}
+
+.alignright {
+    width: 33.33333%;
+    text-align: right;
+}
