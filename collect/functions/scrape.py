@@ -60,6 +60,7 @@ def evaulate(request):
     earliestYear = 1985
     earliestMonth = 1
 
+    values = []
     x = 1
     while x <= int(request.POST["iters"]):
 
@@ -125,10 +126,13 @@ def evaulate(request):
 
         # gets the maximum sharpe ratio table
         trs = tree.xpath("//*[@id='growthChart']/div[2]/div[2]/div/div[1]/table")
+        trss = tree.xpath("//*[@id='growthChart']/div[3]")
 
         try:
             # Parses table data into tickers and %'s
             e = etree.tostring(trs[0])
+            s = etree.tostring(trss[0])
+            value = re.findall('<td class="numberCell">(.*?)</td>', str(s))
 
             ticker = re.findall("<td>(.*?)</td>", str(e))
             tickers = []
@@ -157,6 +161,12 @@ def evaulate(request):
                         art = data_dict[ticks[y]]
                         art.append(percent[tickers.index(ticks[y])])
                         data_dict[ticks[y]] = art
+            for pp in value:
+                try:
+                    ppp = pp.split("/> ")
+                    values.append(ppp[1])
+                except:
+                    values.append(pp)
         except Exception as ex:
             errors += 1
             print(ex)
@@ -183,4 +193,58 @@ def evaulate(request):
     df = pd.DataFrame(tickers, columns=["Tickers"])
     df["Provided"] = arty
     df["Maximum Sharpe"] = percent
-    return df
+
+    provided = []
+    sharpe = []
+    hehe = int(len(values) / 24)
+    for x in range(12):
+        sumy = 0
+        sumy2 = 0
+        for y in range(hehe):
+            try:
+                values[(x * 2) + y * 24] = values[(x * 2) + y * 24].replace(",", "")
+            except:
+                pass
+            try:
+                values[(x * 2) + 1 + y * 24] = values[((x * 2) + 1) + y * 24].replace(
+                    ",", ""
+                )
+            except:
+                pass
+            try:
+                values[(x * 2) + y * 24] = float(
+                    re.sub(r"(?!<\d)\.(?!\d)|[^\s\w.]", "", values[(x * 2) + y * 24])
+                )
+            except:
+                pass
+            try:
+                values[((x * 2) + 1) + y * 24] = float(
+                    re.sub(
+                        r"(?!<\d)\.(?!\d)|[^\s\w.]", "", values[((x * 2) + 1) + y * 24]
+                    )
+                )
+            except:
+                pass
+            sumy += values[(x * 2) + y * 24]
+            sumy2 += values[((x * 2) + 1) + y * 24]
+        sumy = sumy / hehe
+        sumy2 = sumy2 / hehe
+        provided.append(round(sumy, 2))
+        sharpe.append(round(sumy2, 2))
+    col_names = [
+        "Start Balance",
+        "End Balance",
+        "Annualized Return",
+        "Expected Return",
+        "Standard Deviation",
+        "Best Year",
+        "Worst Year",
+        "Max Drawdown",
+        "Sharpe Ratio (ex-ante)",
+        "Sharpe Ratio (ex-post)",
+        "Sortino Ration",
+        "Stock Market Correlation",
+    ]
+    d = {"": col_names, "Provided": provided, "Max Sharpe": sharpe}
+    df2 = pd.DataFrame(d)
+    return df, df2

@@ -19,6 +19,8 @@ $('#post-form').submit(function (e) {
             var data_obj = JSON.parse(data)
             $("div[name='Table1']").html("");
             $("div[name='Table1']").html(data_obj.df);
+            $("div[name='Table2']").html("");
+            $("div[name='Table2']").html(data_obj.df2);
             document.getElementById("table-btn").style.display = "";
             document.getElementById("myProgress").style.display = "none";
             document.getElementById("myBar").style.width = 0 + '%';
