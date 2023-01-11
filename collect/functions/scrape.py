@@ -62,19 +62,27 @@ def evaulate(request):
     while x <= int(request.POST["iters"]):
 
         x += 1
-        startYear = random.randint(earliestYear, year - 1)
-        endYear = random.randint(startYear + 1, year)
+
+        startYear = random.randint(earliestYear, year)
         data["startYear"] = startYear
+
+        # % is modulo
+
+        randMon1 = random.randint(earliestMonth, 12)
+        # 1 year difference (fixed)
+
+        endYear = startYear + 1
+
+        # Considers that it's 2023 and only 1 month has passed
+        if endYear == year:
+            randMon1 = 1
+        if endYear == year + 1:
+            endYear -= 1
+            startYear -= 1
+
         data["endYear"] = endYear
-
-        if startYear == earliestYear:
-            randMon1 = random.randint(earliestMonth, 12)
-        else:
-            randMon1 = random.randint(1, 12)
-            randMon2 = random.randint(randMon1, 12)
-
         data["firstMonth"] = randMon1
-        data["lastMonth"] = randMon2
+        data["lastMonth"] = randMon1
 
         # gets webpage after post request
         url = " https://www.portfoliovisualizer.com/optimize-portfolio"
