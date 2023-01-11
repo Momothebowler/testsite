@@ -71,7 +71,10 @@ def evaulate(request):
 
         # % is modulo
 
-        randMon1 = random.randint(earliestMonth, 12)
+        if startYear == earliestYear:
+            randMon1 = random.randint(earliestMonth, 12)
+        else:
+            randMon1 = random.randint(1, 12)
         # 1 year difference (fixed)
 
         endYear = startYear + 1
@@ -98,31 +101,34 @@ def evaulate(request):
         message = ""
 
         # gets any update message (might need a sooner time period)
+        message = tree.xpath("/html/body/div[1]/div[3]")
+        message = etree.tostring(message[0])
+        message3 = None
         try:
-            message = tree.xpath("/html/body/div[1]/div[3]")
-            message = etree.tostring(message[0])
-            message3 = None
-            try:
-                message3 = re.findall(
-                    "<div class='alert alert-danger''>(.*?)</div>",
-                    message.decode("utf-8"),
-                )
-            except:
-                pass
-            if message3 == None or message3 == []:
-                message = re.findall("</b>(.*?)\n", message.decode("utf-8"))
-            else:
-                x -= 1
-                continue
-            if message != []:
-                message2 = re.findall("\[(.*?) -", message[0])[0].split(" ")
-                earliestYear = int(message2[1])
-                earliestMonth = int(datetime.datetime.strptime(message2[0], "%b").month)
-        except Exception as e:
-            print(e)
-            print(data)
+            message3 = re.findall(
+                "<div class='alert alert-danger''>(.*?)</div>",
+                message.decode("utf-8"),
+            )
+        except:
+            pass
+        if message3 == None or message3 == []:
+            message = re.findall("</b>(.*?)\n", message.decode("utf-8"))
+        else:
             x -= 1
             continue
+        if message != []:
+            try:
+                message2 = re.findall("\[(.*?) -", message[0])[0].split(" ")
+                earliestYear = int(message2[1]) + 1
+                earliestMonth = int(datetime.datetime.strptime(message2[0], "%b").month)
+            except Exception as e:
+                print(message)
+                print(e)
+                print(data)
+                errors += 1
+                print("total errors: " + str(errors))
+                x -= 1
+                continue
 
         # gets the maximum sharpe ratio table
         trs = tree.xpath("//*[@id='growthChart']/div[2]/div[2]/div/div[1]/table")
@@ -170,8 +176,10 @@ def evaulate(request):
         except Exception as ex:
             errors += 1
             print(ex)
+            print(data)
             print("total errors: " + str(errors))
             x -= 1
+            continue
 
     # averages the allocations for all tickers individually
     tickers = []
