@@ -100,8 +100,11 @@ def evaulate(request):
         message = ""
 
         # gets any update message (might need a sooner time period)
-        message = tree.xpath("/html/body/div[1]/div[3]")
-        message = etree.tostring(message[0])
+        try:
+            message = tree.xpath("/html/body/div[1]/div[3]")
+            message = etree.tostring(message[0])
+        except:
+            pass
 
         # Checks for the big bad error first
         try:
