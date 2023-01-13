@@ -250,9 +250,7 @@ def evaulate(request):
                 sumy += values[(x * 2) + y * 24]
                 sumy2 += values[((x * 2) + 1) + y * 24]
             except:
-                print(type(x))
-                print(type(y))
-                print(type(sumy2))
+                pass
         sumy = sumy / hehe
         sumy2 = sumy2 / hehe
         provided.append(round(sumy, 2))

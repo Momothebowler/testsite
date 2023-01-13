@@ -1,3 +1,7 @@
 Could use their query system to verify tickers
 
-Seems to me like when we get the index problem we are getting the wrong box?
+Have scrape as a function that runs iters times
+Have a default profile or a list of similar tickers
+Run these through the function to replace each ticker
+Compare results. If our recommended leads to a better output
+Then return a string (not "") that says XXX ticker is recommended
