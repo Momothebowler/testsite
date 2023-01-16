@@ -77,7 +77,6 @@ def evaulate(request):
                 for item in sublist
             ]
         )
-        print(max_loops, x)
         x += 1
 
         if earliestYear != place_holder_year:
@@ -194,5 +193,4 @@ def evaulate(request):
     d = {"": col_names, "Provided": provided, "Max Sharpe": sharpe}
     df2 = pd.DataFrame(d)
 
-    print(time_dict1)
     return df, df2
