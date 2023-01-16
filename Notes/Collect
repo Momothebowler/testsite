@@ -5,6 +5,8 @@ Have a default profile or a list of similar tickers
 Run these through the function to replace each ticker
 Compare results. If our recommended leads to a better output
 Then return a string (not "") that says XXX ticker is recommended
+|
+-> Needs more functions so we can rerun the loop while switching out tickers
 
 Think we are counting an error that isnt an error
 

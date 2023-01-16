@@ -15,7 +15,6 @@ import re
 import requests
 from lxml import html, etree
 import datetime
-import random
 from .funcs import get_data
 
 
@@ -53,50 +52,59 @@ def evaulate(request):
         data["symbol" + str(r + 1)] = ticks[r]
         data["allocation" + str(r + 1) + "_1"] = arr[r]
 
-    # selects month-month time period vs year to year (4)
+    # selects month-month time period vs year to year (4) DO NOT CHANGE
     data["timePeriod"] = 2
 
     today = datetime.date.today()
     year = int(today.year)
+    place_holder_year = 1985
     earliestYear = 1985
     earliestMonth = 1
+    place_holder_month = 1
+
+    time_dict1 = {}
+    for n in range(2023 - 1985):
+        time_dict1[str(1985 + n)] = np.arange(0, 12)
 
     values = []
     x = 1
-    while x <= int(request.POST["iters"]):
-
+    max_loops = 100000
+    while x <= int(request.POST["iters"]) and max_loops > 0:
+        max_loops = len(
+            [
+                item
+                for sublist in (time_dict1[x] for x in time_dict1.keys())
+                for item in sublist
+            ]
+        )
+        print(max_loops, x)
         x += 1
 
-        startYear = random.randint(earliestYear, year)
-        data["startYear"] = startYear
-        # % is modulo
-
-        if startYear == earliestYear:
-            randMon1 = random.randint(earliestMonth, 12)
-        else:
-            randMon1 = random.randint(1, 12)
-        # 1 year difference (fixed)
-
-        endYear = startYear + 1
-
-        # Considers that it's 2023 and only 1 month has passed
-        if endYear == year:
-            randMon1 = 1
-        if endYear == year + 1:
-            endYear -= 1
-            startYear -= 1
+        if earliestYear != place_holder_year:
+            for o in range(earliestYear - place_holder_year):
+                del time_dict1[str(place_holder_year + o)]
+            place_holder_year = earliestYear
+        # del time_dict1["2023"]
+        if earliestMonth != place_holder_month:
+            b = 0
+            for b in range(earliestMonth - place_holder_month):
+                time_dict1[str(earliestYear)] = np.delete(
+                    time_dict1[str(earliestYear)], b
+                )
+            place_holder_month = earliestMonth
 
         # try:
-        cont, _values, _data_dict, _earliestYear, _earliestMonth = get_data(
-            year,
-            startYear,
-            randMon1,
-            data,
-            earliestMonth,
-            earliestYear,
-            ticks,
-            data_dict,
+        (
+            cont,
+            _values,
+            _data_dict,
+            _earliestYear,
+            _earliestMonth,
+            _time_dict1,
+        ) = get_data(
+            year, data, earliestMonth, earliestYear, ticks, data_dict, time_dict1
         )
+        time_dict1 = _time_dict1
         if cont:
             earliestYear = _earliestYear
             earliestMonth = _earliestMonth
@@ -185,4 +193,6 @@ def evaulate(request):
     ]
     d = {"": col_names, "Provided": provided, "Max Sharpe": sharpe}
     df2 = pd.DataFrame(d)
+
+    print(time_dict1)
     return df, df2

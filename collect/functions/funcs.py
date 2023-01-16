@@ -2,25 +2,46 @@ import requests
 from lxml import html, etree
 import datetime
 import re
+import numpy as np
+import random
 
 
 def get_data(
-    year, startYear, randMon1, data2, earliestMonth, earliestYear, ticks, data_dict2
+    year,
+    data2,
+    earliestMonth,
+    earliestYear,
+    ticks,
+    data_dict2,
+    time_dict,
 ):
     values = []
     data_dict = {}
-    endYear = startYear + 1
     data = data2
     # Considers that it's 2023 and only 1 month has passed
-    if endYear == year:
-        randMon1 = 1
-    if endYear == year + 1:
-        endYear -= 1
-        startYear -= 1
 
-    data["endYear"] = endYear
-    data["firstMonth"] = randMon1
-    data["lastMonth"] = randMon1
+    time_dict1 = time_dict
+
+    startYear = random.choice(list(time_dict1))
+    if startYear != year:
+        data["startYear"] = startYear
+        data["endYear"] = str(int(startYear) + 1)
+    else:
+        data["endYear"] = startYear
+        data["startYear"] = str(int(startYear) - 1)
+
+    try:
+        data["firstMonth"] = np.random.choice(time_dict1[data["startYear"]], size=1)[0]
+    except:
+        del time_dict1[data["startYear"]]
+        return True, [], {}, earliestYear, earliestMonth, time_dict1
+    data["lastMonth"] = data["firstMonth"]
+
+    time_dict1[str(data["startYear"])] = np.delete(
+        time_dict1[str(data["startYear"])],
+        np.where(time_dict1[str(data["startYear"])] == data["firstMonth"]),
+    )
+
     # gets webpage after post request
     url = " https://www.portfoliovisualizer.com/optimize-portfolio"
     page = requests.post(
@@ -50,7 +71,7 @@ def get_data(
             message5 = message5[0].split(" - ")[0].split(" ")
             earliestYear = int(message5[1])
             earliestMonth = int(datetime.datetime.strptime(message5[0], "%b").month)
-            return True, [], {}, earliestYear, earliestMonth
+            return True, [], {}, earliestYear, earliestMonth, time_dict1
     except Exception as e:
         print(e)
         pass
@@ -66,9 +87,8 @@ def get_data(
             message3 = re.findall("\[(.*?) -", message[0])[0].split(" ")
             earliestYear = int(message3[1]) + 1
             earliestMonth = int(datetime.datetime.strptime(message3[0], "%b").month)
-            return True, [], {}, earliestYear, earliestMonth
+            return True, [], {}, earliestYear, earliestMonth, time_dict1
     except Exception as e:
-        print(e)
         pass
 
     # gets the maximum sharpe ratio table
@@ -118,5 +138,5 @@ def get_data(
     except Exception as ex:
         print(ex)
         print(data)
-        return True, [], {}, earliestYear, earliestMonth
-    return False, values, data_dict, earliestYear, earliestMonth
+        return True, [], {}, earliestYear, earliestMonth, time_dict1
+    return False, values, data_dict, earliestYear, earliestMonth, time_dict1
