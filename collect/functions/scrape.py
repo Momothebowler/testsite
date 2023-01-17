@@ -19,163 +19,180 @@ from .funcs import get_data
 
 
 def evaulate(request):
-    ticks = []  # Tickers from Post
-    arr = []  # Allocations from Post
-    data_dict = {}
-    data = {}
+    posted_tickers = []
+    posted_allocations = []
+    received_data_dict = {}
+    send_data = {}
     errors = 0
 
     #  Gets the tickers and allocations from webpage
-    for q in range(int(request.POST["count1"])):
-        if request.POST["symbol" + str(q + 1)] != "":
-            ticks.append(request.POST["symbol" + str(q + 1)].upper())
-            arr.append(int(request.POST["Allocation" + str(q + 1) + "_1"]))
-    # if typed allocations dont sum to 100%, sets all of them to about equal
-    if sum(arr) != 100:
-        arr = np.full(
-            shape=len(ticks),
-            fill_value="{:.2f}".format(100 / len(ticks)),
+    for x in range(int(request.POST["count1"])):
+        if request.POST["symbol" + str(x + 1)] != "":
+            posted_tickers.append(request.POST["symbol" + str(x + 1)].upper())
+            posted_allocations.append(
+                int(request.POST["Allocation" + str(x + 1) + "_1"])
+            )
+
+    if sum(posted_allocations) != 100:
+        posted_allocations = np.full(
+            shape=len(posted_tickers),
+            fill_value="{:.2f}".format(100 / len(posted_tickers)),
             dtype=np.single,
         )
-    sums = np.sum(arr)
-    if sums > 100:
-        arr[0] = round(arr[0] - (sums - 100), 2)
-        arr = ["".join(item) for item in arr.astype(str)]
-    elif sums < 100:
-        arr[0] = round(arr[0] + (100 - sums), 2)
-        arr = ["".join(item) for item in arr.astype(str)]
+    sum_allocation = np.sum(posted_allocations)
+    if sum_allocation > 100:
+        posted_allocations[0] = round(posted_allocations[0] - (sum_allocation - 100), 2)
+        posted_allocations = ["".join(item) for item in posted_allocations.astype(str)]
+    elif sum_allocation < 100:
+        posted_allocations[0] = round(posted_allocations[0] + (100 - sum_allocation), 2)
+        posted_allocations = ["".join(item) for item in posted_allocations.astype(str)]
 
-    arty = []
-    arty = arty + arr
-    # puts the tickers and allocations into a data dict to pass into a post request
-    for r in range(len(ticks)):
-        data["symbol" + str(r + 1)] = ticks[r]
-        data["allocation" + str(r + 1) + "_1"] = arr[r]
+    INITIAL_ALLOCATIONS = posted_allocations
 
-    # selects month-month time period vs year to year (4) DO NOT CHANGE
-    data["timePeriod"] = 2
+    for x in range(len(posted_tickers)):
+        send_data["symbol" + str(x + 1)] = posted_tickers[x]
+        send_data["allocation" + str(x + 1) + "_1"] = posted_allocations[x]
+
+    # selects month-month time period (2) vs year to year (4) DO NOT CHANGE
+    send_data["timePeriod"] = 2
 
     today = datetime.date.today()
-    year = int(today.year)
+    CURRENT_YEAR = int(today.year)
     place_holder_year = 1985
-    earliestYear = 1985
-    earliestMonth = 1
+    earliest_year = 1985
+    earliest_month = 1
     place_holder_month = 1
 
-    time_dict1 = {}
+    all_time_dict = {}
     for n in range(2023 - 1985):
-        time_dict1[str(1985 + n)] = np.arange(0, 12)
+        all_time_dict[str(1985 + n)] = np.arange(1, 13)
 
-    values = []
-    x = 1
-    max_loops = 100000
-    while x <= int(request.POST["iters"]) and max_loops > 0:
-        max_loops = len(
+    summary_data = []
+    max_allowed_loops = 100000
+
+    requested_loops = int(request.POST["iters"])
+
+    current_loop = 0
+    while current_loop <= requested_loops and max_allowed_loops > 0:
+        max_allowed_loops = len(
             [
                 item
-                for sublist in (time_dict1[x] for x in time_dict1.keys())
+                for sublist in (
+                    all_time_dict[current_loop] for current_loop in all_time_dict.keys()
+                )
                 for item in sublist
             ]
         )
-        x += 1
+        current_loop += 1
 
-        if earliestYear != place_holder_year:
-            for o in range(earliestYear - place_holder_year):
-                del time_dict1[str(place_holder_year + o)]
-            place_holder_year = earliestYear
-        # del time_dict1["2023"]
-        if earliestMonth != place_holder_month:
-            b = 0
-            for b in range(earliestMonth - place_holder_month):
-                time_dict1[str(earliestYear)] = np.delete(
-                    time_dict1[str(earliestYear)], b
+        if earliest_year != place_holder_year:
+            for x in range(earliest_year - place_holder_year):
+                del all_time_dict[str(place_holder_year + x)]
+            place_holder_year = earliest_year
+        # del all_time_dict["2023"]
+        if earliest_month != place_holder_month:
+            for x in range(earliest_month - place_holder_month):
+                all_time_dict[str(earliest_year)] = np.delete(
+                    all_time_dict[str(earliest_year)], x
                 )
-            place_holder_month = earliestMonth
+            place_holder_month = earliest_month
 
         # try:
         (
-            cont,
+            _continue,
             _values,
-            _data_dict,
+            _received_data_dict,
             _earliestYear,
             _earliestMonth,
-            _time_dict1,
+            _updated_time_dict,
         ) = get_data(
-            year, data, earliestMonth, earliestYear, ticks, data_dict, time_dict1
+            CURRENT_YEAR,
+            send_data,
+            earliest_month,
+            earliest_year,
+            posted_tickers,
+            received_data_dict,
+            all_time_dict,
         )
-        time_dict1 = _time_dict1
-        if cont:
-            earliestYear = _earliestYear
-            earliestMonth = _earliestMonth
-            x -= 1
+        all_time_dict = _updated_time_dict
+        if _continue:
+            earliest_year = _earliestYear
+            earliest_month = _earliestMonth
+            current_loop -= 1
             errors += 1
             continue
-        if _data_dict == None:
+        if _received_data_dict == None:
             continue
-        data_dict = {**data_dict, **_data_dict}
-        values = values + _values
+        received_data_dict = {**received_data_dict, **_received_data_dict}
+        summary_data = summary_data + _values
 
     # averages the allocations for all tickers individually
     tickers = []
-    percent = []
-    for x in data_dict.keys():
-        arr = data_dict[x]
+    max_sharpe_percents = []
+    for ticker in received_data_dict.keys():
+        posted_allocations = received_data_dict[ticker]
         arr2 = []
 
-        for p in arr:
-            if isinstance(p, float) or isinstance(p, int):
-                arr2.append(p)
+        for allo in posted_allocations:
+            if isinstance(allo, float) or isinstance(allo, int):
+                arr2.append(allo)
             else:
-                arr2.append(float(p.replace("%", "")))
-        data_dict[x] = sum(arr2) / len(arr2)
-        tickers.append(x)
-        percent.append(data_dict[x])
+                arr2.append(float(allo.replace("%", "")))
+        received_data_dict[ticker] = sum(arr2) / len(arr2)
+        tickers.append(ticker)
+        max_sharpe_percents.append(received_data_dict[ticker])
 
     # makes our dataframe and passes it back to the ajax request
-    df = pd.DataFrame(tickers, columns=["Tickers"])
-    df["Provided"] = arty
-    df["Maximum Sharpe"] = percent
+    returned_portfolio_table = pd.DataFrame(tickers, columns=["Tickers"])
+    returned_portfolio_table["Provided"] = INITIAL_ALLOCATIONS
+    returned_portfolio_table["Maximum Sharpe"] = max_sharpe_percents
 
-    provided = []
-    sharpe = []
-    hehe = int(len(values) / 24)
+    provided_porfolio = []
+    sharpe_portfolio = []
+    tot_data_sets = int(len(summary_data) / 24)
     for x in range(12):
-        sumy = 0
-        sumy2 = 0
-        for y in range(hehe):
+        prov_port_summary_sums = 0
+        sharpe_port_summary_sums = 0
+        for y in range(tot_data_sets):
             try:
-                values[(x * 2) + y * 24] = values[(x * 2) + y * 24].replace(",", "")
-            except:
-                pass
-            try:
-                values[(x * 2) + 1 + y * 24] = values[((x * 2) + 1) + y * 24].replace(
+                summary_data[(x * 2) + y * 24] = summary_data[(x * 2) + y * 24].replace(
                     ",", ""
                 )
             except:
                 pass
             try:
-                values[(x * 2) + y * 24] = float(
-                    re.sub(r"(?!<\d)\.(?!\d)|[^\s\w.]", "", values[(x * 2) + y * 24])
-                )
+                summary_data[(x * 2) + 1 + y * 24] = summary_data[
+                    ((x * 2) + 1) + y * 24
+                ].replace(",", "")
             except:
                 pass
             try:
-                values[((x * 2) + 1) + y * 24] = float(
+                summary_data[(x * 2) + y * 24] = float(
                     re.sub(
-                        r"(?!<\d)\.(?!\d)|[^\s\w.]", "", values[((x * 2) + 1) + y * 24]
+                        r"(?!<\d)\.(?!\d)|[^\s\w.]", "", summary_data[(x * 2) + y * 24]
                     )
                 )
             except:
                 pass
             try:
-                sumy += values[(x * 2) + y * 24]
-                sumy2 += values[((x * 2) + 1) + y * 24]
+                summary_data[((x * 2) + 1) + y * 24] = float(
+                    re.sub(
+                        r"(?!<\d)\.(?!\d)|[^\s\w.]",
+                        "",
+                        summary_data[((x * 2) + 1) + y * 24],
+                    )
+                )
             except:
                 pass
-        sumy = sumy / hehe
-        sumy2 = sumy2 / hehe
-        provided.append(round(sumy, 2))
-        sharpe.append(round(sumy2, 2))
+            try:
+                prov_port_summary_sums += summary_data[(x * 2) + y * 24]
+                sharpe_port_summary_sums += summary_data[((x * 2) + 1) + y * 24]
+            except:
+                pass
+        prov_port_summary_sums = prov_port_summary_sums / tot_data_sets
+        sharpe_port_summary_sums = sharpe_port_summary_sums / tot_data_sets
+        provided_porfolio.append(round(prov_port_summary_sums, 2))
+        sharpe_portfolio.append(round(sharpe_port_summary_sums, 2))
     col_names = [
         "Start Balance",
         "End Balance",
@@ -190,7 +207,11 @@ def evaulate(request):
         "Sortino Ration",
         "Stock Market Correlation",
     ]
-    d = {"": col_names, "Provided": provided, "Max Sharpe": sharpe}
-    df2 = pd.DataFrame(d)
+    returned_summary_dict = {
+        "": col_names,
+        "Provided": provided_porfolio,
+        "Max Sharpe": sharpe_portfolio,
+    }
+    returned_summary_table = pd.DataFrame(returned_summary_dict)
 
-    return df, df2
+    return returned_portfolio_table, returned_summary_table

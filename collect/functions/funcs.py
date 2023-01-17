@@ -7,46 +7,45 @@ import random
 
 
 def get_data(
-    year,
-    data2,
-    earliestMonth,
-    earliestYear,
-    ticks,
-    data_dict2,
-    time_dict,
+    CURRENT_YEAR,
+    send_data,
+    earliest_month,
+    earliest_year,
+    posted_tickers,
+    received_data_dict,
+    all_time_dict,
 ):
-    values = []
-    data_dict = {}
-    data = data2
+    _summary_data = []
+    data_dict2 = received_data_dict
     # Considers that it's 2023 and only 1 month has passed
 
-    time_dict1 = time_dict
-
-    startYear = random.choice(list(time_dict1))
-    if startYear != year:
-        data["startYear"] = startYear
-        data["endYear"] = str(int(startYear) + 1)
+    start_year = random.choice(list(all_time_dict))
+    if start_year != CURRENT_YEAR:
+        send_data["startYear"] = start_year
+        send_data["endYear"] = str(int(start_year) + 1)
     else:
-        data["endYear"] = startYear
-        data["startYear"] = str(int(startYear) - 1)
+        send_data["endYear"] = start_year
+        send_data["startYear"] = str(int(start_year) - 1)
 
     try:
-        data["firstMonth"] = np.random.choice(time_dict1[data["startYear"]], size=1)[0]
+        send_data["firstMonth"] = np.random.choice(
+            all_time_dict[send_data["startYear"]], size=1
+        )[0]
     except:
-        del time_dict1[data["startYear"]]
-        return True, [], {}, earliestYear, earliestMonth, time_dict1
-    data["lastMonth"] = data["firstMonth"]
+        del all_time_dict[send_data["startYear"]]
+        return True, [], {}, earliest_year, earliest_month, all_time_dict
+    send_data["lastMonth"] = send_data["firstMonth"]
 
-    time_dict1[str(data["startYear"])] = np.delete(
-        time_dict1[str(data["startYear"])],
-        np.where(time_dict1[str(data["startYear"])] == data["firstMonth"]),
+    all_time_dict[str(send_data["startYear"])] = np.delete(
+        all_time_dict[str(send_data["startYear"])],
+        np.where(all_time_dict[str(send_data["startYear"])] == send_data["firstMonth"]),
     )
 
     # gets webpage after post request
     url = " https://www.portfoliovisualizer.com/optimize-portfolio"
     page = requests.post(
         url,
-        data=data,
+        data=send_data,
     )
 
     tree = html.fromstring(page.content)
@@ -69,9 +68,9 @@ def get_data(
         )
         if message5 != []:
             message5 = message5[0].split(" - ")[0].split(" ")
-            earliestYear = int(message5[1])
-            earliestMonth = int(datetime.datetime.strptime(message5[0], "%b").month)
-            return True, [], {}, earliestYear, earliestMonth, time_dict1
+            earliest_year = int(message5[1])
+            earliest_month = int(datetime.datetime.strptime(message5[0], "%b").month)
+            return True, [], {}, earliest_year, earliest_month, all_time_dict
     except Exception as e:
         print(e)
         pass
@@ -85,9 +84,9 @@ def get_data(
         if message3 != []:
             message3 = re.findall("</b>(.*?)\n", message.decode("utf-8"))
             message3 = re.findall("\[(.*?) -", message[0])[0].split(" ")
-            earliestYear = int(message3[1]) + 1
-            earliestMonth = int(datetime.datetime.strptime(message3[0], "%b").month)
-            return True, [], {}, earliestYear, earliestMonth, time_dict1
+            earliest_year = int(message3[1]) + 1
+            earliest_month = int(datetime.datetime.strptime(message3[0], "%b").month)
+            return True, [], {}, earliest_year, earliest_month, all_time_dict
     except Exception as e:
         pass
 
@@ -103,40 +102,47 @@ def get_data(
         value = re.findall('<td class="numberCell">(.*?)</td>', str(s))
 
         ticker = re.findall("<td>(.*?)</td>", str(e))
-        tickers = []
-        for i in range(len(ticker)):
-            if i % 2 == 0:
-                tickers.append(ticker[i])
+        tickers = [ticker[i] for i in range(len(ticker)) if i % 2 == 0]
+
         percent = re.findall('<td class="numberCell">(.*?)</td>', str(e))
 
-        for y in range(len(ticks)):
+        for y in range(len(posted_tickers)):
             # checks if its in the dictionary yet and then if it was on the webpage
             # last part is if we a tick with 0% and another with 100% we need
             # to a 0 into the arr for averaging purposes
-            if ticks[y] not in data_dict2:
+            if posted_tickers[y] not in data_dict2:
                 # Initial add of each ticker (first time scraped)
-                if ticks[y] not in tickers:
+                if posted_tickers[y] not in tickers:
 
-                    data_dict[ticks[y]] = [0]
+                    received_data_dict[posted_tickers[y]] = [0]
                 else:
-                    data_dict[ticks[y]] = [percent[tickers.index(ticks[y])]]
+                    received_data_dict[posted_tickers[y]] = [
+                        percent[tickers.index(posted_tickers[y])]
+                    ]
             else:
-                if ticks[y] not in tickers:
-                    art = data_dict2[ticks[y]]
+                if posted_tickers[y] not in tickers:
+                    art = data_dict2[posted_tickers[y]]
                     art.append(0)
-                    data_dict[ticks[y]] = art
+                    received_data_dict[posted_tickers[y]] = art
                 else:
-                    art = data_dict2[ticks[y]]
-                    art.append(percent[tickers.index(ticks[y])])
-                    data_dict[ticks[y]] = art
+                    art = data_dict2[posted_tickers[y]]
+                    art.append(percent[tickers.index(posted_tickers[y])])
+                    received_data_dict[posted_tickers[y]] = art
         for pp in value:
             try:
                 ppp = pp.split("/> ")
-                values.append(ppp[1])
+                _summary_data.append(ppp[1])
             except:
-                values.append(pp)
+                _summary_data.append(pp)
     except Exception as ex:
         print(ex)
-        print(data)
-        return True, [], {}, earliestYear, earliestMonth, time_dict1
-    return False, values, data_dict, earliestYear, earliestMonth, time_dict1
+        print(send_data)
+        return True, [], {}, earliest_year, earliest_month, all_time_dict
+    return (
+        False,
+        _summary_data,
+        received_data_dict,
+        earliest_year,
+        earliest_month,
+        all_time_dict,
+    )
