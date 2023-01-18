@@ -1,6 +1,5 @@
 Could use their query system to verify tickers
 
-Have scrape as a function that runs iters times
 Have a default profile or a list of similar tickers
 Run these through the function to replace each ticker
 Compare results. If our recommended leads to a better output
@@ -8,6 +7,6 @@ Then return a string (not "") that says XXX ticker is recommended
 |
 -> Needs more functions so we can rerun the loop while switching out tickers
 
-Think we are counting an error that isnt an error
+Might wantr to return a dictionary from first function then we can pass it to the final function
+Then combine all df into one dictionary
 
-Need a time check table

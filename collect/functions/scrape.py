@@ -214,4 +214,6 @@ def evaulate(request):
     }
     returned_summary_table = pd.DataFrame(returned_summary_dict)
 
-    return returned_portfolio_table, returned_summary_table
+    frame = {"df": returned_portfolio_table, "df2": returned_summary_table}
+
+    return frame

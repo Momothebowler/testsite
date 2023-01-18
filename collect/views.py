@@ -11,7 +11,7 @@ def collect(request):
 
 def create(request):
     if request.method == "POST":
-        df, df2 = evaulate(request)  # tickers)
+        frame = evaulate(request)  # tickers)
         # mydict = {
         #    "df": df.to_html(
         #        float_format=lambda x: "%10.2f" % x,
@@ -21,7 +21,7 @@ def create(request):
         #        col_space="38.25px",
         #    )
         # }
-        df = df.to_html(
+        df = frame["df"].to_html(
             float_format=lambda x: "%10.2f" % x,
             border=3,
             classes="table table-striped text-center",
@@ -29,7 +29,7 @@ def create(request):
             col_space="38.25px",
             index=False,
         )
-        df2 = df2.to_html(
+        df2 = frame["df2"].to_html(
             float_format=lambda x: "%10.2f" % x,
             border=3,
             classes="table table-striped text-center",
