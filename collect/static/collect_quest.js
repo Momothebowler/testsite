@@ -15,11 +15,8 @@ function changeStep(btn) {
 }
 
 function addRow(ele) {
-    console.log(typeof ele.id)
     str = ele.id
     num = parseInt(str.split("n")[1].split("_")[0], 10);
-    console.log(num)
-    console.log("hhhhhhhhh")
     var element = document.querySelector('form .step.active').querySelector(".inp-group")
     var count = element.childElementCount;
     if (num == count - 1) {
