@@ -10,3 +10,5 @@ Then return a string (not "") that says XXX ticker is recommended
 Might wantr to return a dictionary from first function then we can pass it to the final function
 Then combine all df into one dictionary
 
+Clean Up the get_data function  (ex: pass the send_data dict into the function calc it before the func)
+

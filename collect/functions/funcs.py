@@ -48,12 +48,7 @@ def get_data(
         url,
         data=send_data,
     )
-
     tree = html.fromstring(page.content)
-
-    # /html/body/div[1]/div[2]
-    # /html/body/div[1]/div[3]
-    # /html/body/div[1]/div[2]
 
     # Checks for the big bad error first
     try:
