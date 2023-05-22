@@ -24,7 +24,7 @@ def create(request):
         df = frame["df"].to_html(
             float_format=lambda x: "%10.2f" % x,
             border=3,
-            classes="table table-striped text-center",
+            classes="table table-striped text-center  table-hover",
             justify="center",
             col_space="38.25px",
             index=False,
@@ -32,11 +32,13 @@ def create(request):
         df2 = frame["df2"].to_html(
             float_format=lambda x: "%10.2f" % x,
             border=3,
-            classes="table table-striped text-center",
+            #classes="table table-striped text-center table-hover",
             justify="center",
             col_space="38.25px",
             index=False,
         )
+        #html_string.format(table=demo_df.to_html(classes='mystyle'))
+        
         data = {
             "df": df,
             "df2": df2,
