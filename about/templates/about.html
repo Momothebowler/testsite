@@ -9,17 +9,17 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'all.css' %}" />
-    <script src="{% static 'dropdown.js' %}"></script>
+    <!--<script src="{% static 'dropdown.js' %}"></script>-->
 </head>
 
 
 <body>
     <div id="page-container">
         <div id="content-wrap">
-            <h2 style="font-family: Garamond, serif;margin-left: 20px;">Kibler Strategies</h2>
+            <h2 class="top">Kibler Strategies</h2>
             {% include 'navbar.html' %}
             {% block content %}{% endblock %}
-            
+
 
 
             <section style="min-height: 100vh;width: 100%; background-color: aliceblue;">
@@ -27,11 +27,14 @@
                     <h3 style="margin:0">We are a group of creators looking to help people out finacially.</h3>
                 </div>
             </section>
-            <footer id="footer" class="footer">
-                <p>
-                    Kibler Strategies 2022
-                </p>
-            </footer>
+            <div class="footer_holder"
+                style="background-image:url('static/stocks.jpg'); background-repeat:no-repeat;background-size:cover;">
+                <div class="foot">
+                    <p>
+                        Kibler Strategies 2022
+                    </p>
+                </div>
+            </div>
 
         </div>
     </div>

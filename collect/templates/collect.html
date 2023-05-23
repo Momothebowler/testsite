@@ -18,8 +18,8 @@
 <body>
     <div id="page-container">
         <div id="content-wrap">
-            <div style="background-color:white;padding-top: 1px;padding-bottom: 1px;">
-                <h2 style="font-family: Garamond, serif;margin-left: 20px;">Kibler Strategies
+            <div style="background-color:white;">
+                <h2 class="top">Kibler Strategies
                 </h2>
             </div>
             {% include 'navbar.html' %}
@@ -81,11 +81,14 @@
             </form>
         </div>
 
-        <footer id="footer" class="footer">
-            <p>
-                Kibler Strategies 2022
-            </p>
-        </footer>
+        <div class="footer_holder"
+            style="background-image:url('static/stocks.jpg'); background-repeat:no-repeat;background-size:cover;">
+            <div class="foot">
+                <p>
+                    Kibler Strategies 2022
+                </p>
+            </div>
+        </div>
     </div>
 
 </body>

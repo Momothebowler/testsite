@@ -1,4 +1,21 @@
+Make the site anew or make this it's own site with its own home page and add more text and such
+Maybe write up payment schemes
+I want a nice and clean looking site with maybe some copyright free animated splash pages
+
+
+Making profiles
+
+
+Add question mark hover tooltips 
+
+
 Could use their query system to verify tickers
+
+
+We have posted tickers. Add our recommended to end of the list
+Loop through the list to get the data while removing the tickers.
+Combine data separately (might need to store the length of the original list or always keep it even)
+
 
 Have a default profile or a list of similar tickers
 Run these through the function to replace each ticker
