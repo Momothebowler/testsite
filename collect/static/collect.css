@@ -155,5 +155,4 @@ tr:nth-child(even) {
 
 tr:hover {
     background: silver;
-    cursor: pointer;
 }

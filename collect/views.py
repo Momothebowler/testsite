@@ -24,24 +24,39 @@ def create(request):
         # }
         df = frame["df"].to_html(
             float_format=lambda x: "%10.2f" % x,
-            #border=3,
-            #classes="table table-striped text-center  table-hover",
+            # border=3,
+            # classes="table table-striped text-center  table-hover",
             justify="center",
-            #col_space="38.25px",
+            # col_space="38.25px",
             index=False,
         )
         df2 = frame["df2"].to_html(
             float_format=lambda x: "%10.2f" % x,
-            #border=3,
-            #classes="table table-striped text-center table-hover",
+            # border=3,
+            # classes="table table-striped text-center table-hover",
             justify="center",
-            #col_space="38.25px",
+            # col_space="38.25px",
             index=False,
         )
-        #html_string.format(table=demo_df.to_html(classes='mystyle'))
-
-        data = {
-            "df": df,
-            "df2": df2,
-        }
+        # html_string.format(table=demo_df.to_html(classes='mystyle'))
+        frame["df2"] = frame["df2"].rename(
+            columns={"": "Tickers", "Max Sharpe": "Maximum Sharpe"}
+        )
+        df3 = pd.concat(
+            [frame["df"], frame["df2"]],
+            ignore_index=True,
+        )
+        # data = {
+        #    "df": df,
+        #    "df2": df2,
+        # }
+        df4 = df3.to_html(
+            float_format=lambda x: "%10.2f" % x,
+            # border=3,
+            # classes="table table-striped text-center table-hover",
+            justify="center",
+            # col_space="38.25px",
+            index=False,
+        )
+        data = {"df": df4}
         return HttpResponse(json.dumps(data))
