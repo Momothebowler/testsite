@@ -12,7 +12,7 @@ def collect(request):
 
 def create(request):
     if request.method == "POST":
-        frame = evaulate(request)  # tickers)
+        frame = evaulate(request, False)  # tickers)
         # mydict = {
         #    "df": df.to_html(
         #        float_format=lambda x: "%10.2f" % x,

@@ -18,12 +18,14 @@ import datetime
 from .funcs import get_data
 
 
-def evaulate(request):
+def evaulate(request, recommend_profile):
     posted_tickers = []
     posted_allocations = []
     received_data_dict = {}
     send_data = {}
     errors = 0
+
+    recommended_tickers = {"QQQ": 50, "TQQQ": 50}
 
     #  Gets the tickers and allocations from webpage
     for x in range(int(request.POST["count1"])):
