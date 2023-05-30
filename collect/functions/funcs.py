@@ -16,6 +16,7 @@ def get_data(
     received_data_dict,
     all_time_dict,
 ):
+    """Gets Data from https://www.portfoliovisualizer.com/optimize-portfolio"""
     _summary_data = []
     data_dict2 = received_data_dict
     # Considers that it's 2023 and only 1 month has passed
@@ -43,7 +44,7 @@ def get_data(
     )
 
     # gets webpage after post request
-    url = " https://www.portfoliovisualizer.com/optimize-portfolio"
+    url = "https://www.portfoliovisualizer.com/optimize-portfolio"
     page = requests.post(
         url,
         data=send_data,
@@ -127,7 +128,6 @@ def get_data(
             if ticker not in data_dict2:
                 # Initial add of each ticker (first time scraped)
                 if ticker not in tickers:
-
                     received_data_dict[ticker] = [0]
                 else:
                     received_data_dict[ticker] = [percent[tickers.index(ticker)]]
