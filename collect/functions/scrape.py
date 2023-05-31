@@ -66,9 +66,6 @@ def evaulate(request):
         posted_tickers,
         posted_send_data,
     )
-    print("hello")
-    time.sleep(2)
-    print("hi")
     frame2 = godDaveMePLease(
         int(request.POST["iters"]),
         recommended_tickers_allocations,
@@ -91,7 +88,6 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
     for n in range(2023 - 1985):
         all_time_dict[str(1985 + n)] = np.arange(1, 13)
 
-    print(all_time_dict)
     summary_data = []
     max_allowed_loops = 100000
 
@@ -108,17 +104,24 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
         )
         current_loop += 1
 
-        if earliest_year != place_holder_year:
-            for x in range(earliest_year - place_holder_year):
-                del all_time_dict[str(place_holder_year + x)]
-            place_holder_year = earliest_year
-        # del all_time_dict["2023"]
-        if earliest_month != place_holder_month:
-            for x in range(earliest_month - place_holder_month):
-                all_time_dict[str(earliest_year)] = np.delete(
-                    all_time_dict[str(earliest_year)], x
-                )
-            place_holder_month = earliest_month
+        #
+        # These should be a 1 time run, but aren't?
+        #
+        try:
+            if earliest_year != place_holder_year:
+                for x in range(earliest_year - place_holder_year):
+                    del all_time_dict[str(place_holder_year + x)]
+                place_holder_year = earliest_year
+                # del all_time_dict["2023"]
+
+                if earliest_month != place_holder_month:
+                    for x in range(earliest_month - place_holder_month):
+                        all_time_dict[str(earliest_year)] = np.delete(
+                            all_time_dict[str(earliest_year)], x
+                        )
+                    place_holder_month = earliest_month
+        except:
+            print("I give up")
 
         # try:
         (
@@ -162,13 +165,13 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
                 arr2.append(float(allo.replace("%", "")))
         received_data_dict[ticker] = sum(arr2) / len(arr2)
         tickers.append(ticker)
+        received_data_dict[ticker]
         max_sharpe_percents.append(received_data_dict[ticker])
 
     # makes our dataframe and passes it back to the ajax request
     returned_portfolio_table = pd.DataFrame(tickers, columns=["Tickers"])
     returned_portfolio_table["Provided"] = allocations
     returned_portfolio_table["Maximum Sharpe"] = max_sharpe_percents
-
     provided_porfolio = []
     sharpe_portfolio = []
     tot_data_sets = int(len(summary_data) / 24)
@@ -176,18 +179,17 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
         prov_port_summary_sums = 0
         sharpe_port_summary_sums = 0
         for y in range(tot_data_sets):
+            # try:
+            summary_data[(x * 2) + y * 24] = summary_data[(x * 2) + y * 24].replace(
+                ",", ""
+            )
+            summary_data[(x * 2) + 1 + y * 24] = summary_data[
+                ((x * 2) + 1) + y * 24
+            ].replace(",", "")
+            summary_data[(x * 2) + y * 24] = float(
+                re.sub(r"(?!<\d)\.(?!\d)|[^\s\w.]", "", summary_data[(x * 2) + y * 24])
+            )
             try:
-                summary_data[(x * 2) + y * 24] = summary_data[(x * 2) + y * 24].replace(
-                    ",", ""
-                )
-                summary_data[(x * 2) + 1 + y * 24] = summary_data[
-                    ((x * 2) + 1) + y * 24
-                ].replace(",", "")
-                summary_data[(x * 2) + y * 24] = float(
-                    re.sub(
-                        r"(?!<\d)\.(?!\d)|[^\s\w.]", "", summary_data[(x * 2) + y * 24]
-                    )
-                )
                 summary_data[((x * 2) + 1) + y * 24] = float(
                     re.sub(
                         r"(?!<\d)\.(?!\d)|[^\s\w.]",
@@ -195,10 +197,17 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
                         summary_data[((x * 2) + 1) + y * 24],
                     )
                 )
-                prov_port_summary_sums += summary_data[(x * 2) + y * 24]
-                sharpe_port_summary_sums += summary_data[((x * 2) + 1) + y * 24]
-            except Exception as e:
-                print(e)
+            except:
+                # print(summary_data)
+                print("I'm over here")
+            try:
+                prov_port_summary_sums += int(summary_data[(x * 2) + y * 24])
+                sharpe_port_summary_sums += int(summary_data[((x * 2) + 1) + y * 24])
+            except:
+                # Skips of N/A
+                pass
+        # except Exception as e:
+        #    print(e)
         prov_port_summary_sums = prov_port_summary_sums / tot_data_sets
         sharpe_port_summary_sums = sharpe_port_summary_sums / tot_data_sets
         provided_porfolio.append(round(prov_port_summary_sums, 2))
