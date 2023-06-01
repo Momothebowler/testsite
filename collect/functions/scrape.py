@@ -17,8 +17,8 @@ def evaulate(request):
     )  # Data we send to portfoliooptimizer.com (I think is the site)
     recommended_send_data = {}
 
-    recommended_tickers = ["QQQ", "TQQQ"]
-    recommended_tickers_allocations = [50, 50]
+    recommended_tickers = ["SPY", "AMZN", "GOOG", "TSLA", "MSFT"]
+    recommended_tickers_allocations = [20, 20, 20, 20, 20]
 
     # Sets Up posted_Tickers and posted_allocations
     for x in range(int(request.POST["count1"])):

@@ -23,32 +23,49 @@
       {% block content %}{% endblock %}
 
 
-      <section>
-
-        <form id="post-form">
-          {% csrf_token %}
-          <input id="create-btn" name="create-btn" type="submit" />
-          <div name="name" id="name"></div>
-          <!--<input type="submit" value={{x}} name="mybtn" id="start_submit" class="btn btn-success" />
-          <div style="width: 10%;margin-left: 75px;">
-            {{df|safe}}
-          </div>-->
-        </form>
-
-      </section>
-
-
-      <div class="footer_holder"
-        style="background-image:url('static/stocks.jpg'); background-repeat:no-repeat;background-size:cover;">
-        <div class="foot">
-          <p>
-            Kibler Strategies 2022
-          </p>
+      <section style="min-height: 100vh;width: 100%; background-color: rgb(73, 79, 85);">
+        <div class="about-section">
+          <h1>Projects</h1>
+          <p>Projects Finished and Working On.</p>
         </div>
-      </div>
 
+        <h2 style="text-align:center; color:white">Automatic Bots</h2>
+        <div class="row">
+          <div class="column" style="width:50%;">
+            <div class="card">
+              <img src="{% static 'bot.jpg' %}" alt="Ai Trader" style="width:100%">
+              <div class="container">
+                <h2>Trading Bot</h2>
+                <p class="title">Project 1</p>
+                <p>Trades Crypto and Stocks Automatically.</p>
+                <p><button class="button">Download</button></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="column" style="width:50%;">
+            <div class="card">
+              <img src="{% static 'manila_folder.jpg' %}" alt="Rebalancer" style="width:100%">
+              <div class="container">
+                <h2>Portfolio Rebalancer</h2>
+                <p class="title">Sharpe Ratio</p>
+                <p>Gives Suggestions on How to Rebalance Your Portfolio.</p>
+                <p><button class="button">Go To</button></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer_holder"
+            style="background-image:url('static/stocks.jpg'); background-repeat:no-repeat;background-size:cover;">
+            <div class="foot">
+              <p>
+                Kibler Strategies 2022
+              </p>
+            </div>
+          </div>
+
+        </div>
     </div>
-  </div>
 </body>
 <script type="text/javascript" src="{% static 'table.js' %}"></script>
 
