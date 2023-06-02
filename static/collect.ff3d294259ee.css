@@ -1,0 +1,158 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+    min-width: 100%;
+    background-color: aliceblue;
+}
+
+.container {
+    min-width: 750px;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 20px #00000020;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 50px;
+    background-color: white;
+}
+
+.wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e4e1e1;
+}
+
+.form-group {
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.form-group input {
+    padding: 8px 10px;
+    background: #ddd;
+    border: none;
+    width: 50%;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.form-group input:focus {
+    outline: 1px solid #efefef;
+}
+
+.flex {
+    display: flex;
+    gap: 1.5em;
+    margin-bottom: 15px;
+}
+
+.delete {
+    text-decoration: none;
+    display: inline-block;
+    background: #f44336;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add {
+    text-decoration: none;
+    display: inline-block;
+    background: #8bc34a;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+label {
+    cursor: text;
+}
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+}
+
+#myProgress {
+    width: 100%;
+    background-color: grey;
+}
+
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}
+
+#textbox {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.alignleft {
+    width: 33.33333%;
+    text-align: left;
+}
+
+.aligncenter {
+    width: 33.33333%;
+    text-align: center;
+}
+
+.alignright {
+    width: 33.33333%;
+    text-align: right;
+}
+
+.mystyle {
+    font-size: 11pt;
+    font-family: Arial;
+    border-collapse: collapse;
+    border: 1px solid silver;
+
+}
+
+td,
+th {
+    padding: 5px;
+}
+
+tr:nth-child(even) {
+    background: #E0E0E0;
+}
+
+tr:hover {
+    background: silver;
+}
