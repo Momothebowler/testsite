@@ -1,8 +1,11 @@
+var width = 1
 $('#post-form').submit(function (e) {
     e.preventDefault();
     document.getElementById("table-btn").style.display = "none";
-    document.getElementById("myProgress").style.display = "block"
+    document.getElementById("myProgress").style.display = "block";
     data = {};
+    data['iters'] = $('#Iterations').val();
+    max = data['iters'];
     data['csrfmiddlewaretoken'] = $('[name=csrfmiddlewaretoken]').val();
     var count1 = document.querySelector('form .step-1').querySelector(".inp-group").childElementCount;
     data['count1'] = count1
@@ -16,29 +19,30 @@ $('#post-form').submit(function (e) {
         data: data,
         success: function (data) {
             var data_obj = JSON.parse(data)
-            $("div[name='name']").html("");
-            $("div[name='name']").html(data_obj.df);
+            $("div[name='Table1']").html("");
+            $("div[name='Table1']").html(data_obj.df);
+            $("div[name='Table2']").html("");
+            $("div[name='Table2']").html(data_obj.df2);
             document.getElementById("table-btn").style.display = "";
             document.getElementById("myProgress").style.display = "none";
+            width = 101;   
         }
     });
 });
 
-var i = 0;
+
 function move() {
-  if (i == 0) {
-    i = 1;
-    var elem = document.getElementById("myBar");
-    var width = 1;
-    var id = setInterval(frame, 200);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-        i = 0;
-      } else {
-        width++;
-        elem.style.width = width + "%";
-      }
+  var elem = document.getElementById("myBar");   
+  width = 1;
+  var max = $('#Iterations').val();
+  var id = setInterval(frame, max * 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+      elem.style.width = 0 + '%';
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
     }
   }
 }

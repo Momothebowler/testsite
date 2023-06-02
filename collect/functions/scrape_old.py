@@ -1,3 +1,13 @@
+#
+# Goes to portfoliooptimizer.com/optimize
+# plugs in tickers entered in on webpage and allocations
+# sends a post request
+# returns the percentages from the maximum sharpe ratio table
+# repeats 20 times and averages
+# sends a dataframe with the averages
+#
+
+
 import requests
 import pandas as pd
 import numpy as np
@@ -6,28 +16,24 @@ import requests
 from lxml import html, etree
 import datetime
 from .funcs import get_data
-import time
 
 
-def evaulate(request):
+def evaulate(request, recommend_profile):
     posted_tickers = []
     posted_allocations = []
-    posted_send_data = (
-        {}
-    )  # Data we send to portfoliooptimizer.com (I think is the site)
-    recommended_send_data = {}
+    received_data_dict = {}  # Data we get as we gather
+    send_data = {}  # Data we send to portfoliooptimizer.com (I think is the site)
 
-    recommended_tickers = ["SPY", "AMZN", "GOOG", "TSLA", "MSFT"]
-    recommended_tickers_allocations = [20, 20, 20, 20, 20]
+    recommended_tickers = {"QQQ": 50, "TQQQ": 50}
 
-    # Sets Up posted_Tickers and posted_allocations
+    #  Gets the tickers and allocations from webpage
     for x in range(int(request.POST["count1"])):
         if request.POST["symbol" + str(x + 1)] != "":
             posted_tickers.append(request.POST["symbol" + str(x + 1)].upper())
             posted_allocations.append(
                 int(request.POST["Allocation" + str(x + 1) + "_1"])
             )
-    # Computes posted_allocations
+
     if sum(posted_allocations) != 100:
         posted_allocations = np.full(
             shape=len(posted_tickers),
@@ -44,47 +50,20 @@ def evaulate(request):
 
     INITIAL_ALLOCATIONS = posted_allocations
 
-    # For posted
     for x in range(len(posted_tickers)):
-        posted_send_data["symbol" + str(x + 1)] = posted_tickers[x]
-        posted_send_data["allocation" + str(x + 1) + "_1"] = posted_allocations[x]
+        send_data["symbol" + str(x + 1)] = posted_tickers[x]
+        send_data["allocation" + str(x + 1) + "_1"] = posted_allocations[x]
 
     # selects month-month time period (2) vs year to year (4) DO NOT CHANGE
-    posted_send_data["timePeriod"] = 2
+    send_data["timePeriod"] = 2
 
-    # For recommended
-    for x in range(len(posted_tickers)):
-        recommended_send_data["symbol" + str(x + 1)] = posted_tickers[x]
-        recommended_send_data["allocation" + str(x + 1) + "_1"] = posted_allocations[x]
-
-    # selects month-month time period (2) vs year to year (4) DO NOT CHANGE
-    recommended_send_data["timePeriod"] = 2
-
-    frame1 = godDaveMePLease(
-        int(request.POST["iters"]),
-        INITIAL_ALLOCATIONS,
-        posted_tickers,
-        posted_send_data,
-    )
-    time.sleep(5)
-    frame2 = godDaveMePLease(
-        int(request.POST["iters"]),
-        recommended_tickers_allocations,
-        recommended_tickers,
-        recommended_send_data,
-    )
-
-    return frame1, frame2
-
-
-def godDaveMePLease(loops, allocations, tickers, send_data):
-    received_data_dict = {}  # Data we get as we gather
     today = datetime.date.today()
     CURRENT_YEAR = int(today.year)
     place_holder_year = 1985
     earliest_year = 1985
     earliest_month = 1
     place_holder_month = 1
+
     all_time_dict = {}
     for n in range(2023 - 1985):
         all_time_dict[str(1985 + n)] = np.arange(1, 13)
@@ -92,8 +71,10 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
     summary_data = []
     max_allowed_loops = 100000
 
+    requested_loops = int(request.POST["iters"])
+
     current_loop = 0
-    while current_loop <= loops and max_allowed_loops > 0:
+    while current_loop <= requested_loops and max_allowed_loops > 0:
         max_allowed_loops = len(
             [
                 item
@@ -105,24 +86,17 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
         )
         current_loop += 1
 
-        #
-        # These should be a 1 time run, but aren't?
-        #
-        try:
-            if earliest_year != place_holder_year:
-                for x in range(earliest_year - place_holder_year):
-                    del all_time_dict[str(place_holder_year + x)]
-                place_holder_year = earliest_year
-                # del all_time_dict["2023"]
-
-                if earliest_month != place_holder_month:
-                    for x in range(earliest_month - place_holder_month):
-                        all_time_dict[str(earliest_year)] = np.delete(
-                            all_time_dict[str(earliest_year)], x
-                        )
-                    place_holder_month = earliest_month
-        except:
-            print("I give up")
+        if earliest_year != place_holder_year:
+            for x in range(earliest_year - place_holder_year):
+                del all_time_dict[str(place_holder_year + x)]
+            place_holder_year = earliest_year
+        # del all_time_dict["2023"]
+        if earliest_month != place_holder_month:
+            for x in range(earliest_month - place_holder_month):
+                all_time_dict[str(earliest_year)] = np.delete(
+                    all_time_dict[str(earliest_year)], x
+                )
+            place_holder_month = earliest_month
 
         # try:
         (
@@ -137,7 +111,7 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
             send_data,
             earliest_month,
             earliest_year,
-            tickers,
+            posted_tickers,
             received_data_dict,
             all_time_dict,
         )
@@ -166,13 +140,13 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
                 arr2.append(float(allo.replace("%", "")))
         received_data_dict[ticker] = sum(arr2) / len(arr2)
         tickers.append(ticker)
-        received_data_dict[ticker]
         max_sharpe_percents.append(received_data_dict[ticker])
 
     # makes our dataframe and passes it back to the ajax request
     returned_portfolio_table = pd.DataFrame(tickers, columns=["Tickers"])
-    returned_portfolio_table["Provided"] = allocations
+    returned_portfolio_table["Provided"] = INITIAL_ALLOCATIONS
     returned_portfolio_table["Maximum Sharpe"] = max_sharpe_percents
+
     provided_porfolio = []
     sharpe_portfolio = []
     tot_data_sets = int(len(summary_data) / 24)
@@ -180,16 +154,26 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
         prov_port_summary_sums = 0
         sharpe_port_summary_sums = 0
         for y in range(tot_data_sets):
-            # try:
-            summary_data[(x * 2) + y * 24] = summary_data[(x * 2) + y * 24].replace(
-                ",", ""
-            )
-            summary_data[(x * 2) + 1 + y * 24] = summary_data[
-                ((x * 2) + 1) + y * 24
-            ].replace(",", "")
-            summary_data[(x * 2) + y * 24] = float(
-                re.sub(r"(?!<\d)\.(?!\d)|[^\s\w.]", "", summary_data[(x * 2) + y * 24])
-            )
+            try:
+                summary_data[(x * 2) + y * 24] = summary_data[(x * 2) + y * 24].replace(
+                    ",", ""
+                )
+            except:
+                pass
+            try:
+                summary_data[(x * 2) + 1 + y * 24] = summary_data[
+                    ((x * 2) + 1) + y * 24
+                ].replace(",", "")
+            except:
+                pass
+            try:
+                summary_data[(x * 2) + y * 24] = float(
+                    re.sub(
+                        r"(?!<\d)\.(?!\d)|[^\s\w.]", "", summary_data[(x * 2) + y * 24]
+                    )
+                )
+            except:
+                pass
             try:
                 summary_data[((x * 2) + 1) + y * 24] = float(
                     re.sub(
@@ -199,16 +183,12 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
                     )
                 )
             except:
-                # print(summary_data)
-                print("I'm over here")
-            try:
-                prov_port_summary_sums += int(summary_data[(x * 2) + y * 24])
-                sharpe_port_summary_sums += int(summary_data[((x * 2) + 1) + y * 24])
-            except:
-                # Skips of N/A
                 pass
-        # except Exception as e:
-        #    print(e)
+            try:
+                prov_port_summary_sums += summary_data[(x * 2) + y * 24]
+                sharpe_port_summary_sums += summary_data[((x * 2) + 1) + y * 24]
+            except:
+                pass
         prov_port_summary_sums = prov_port_summary_sums / tot_data_sets
         sharpe_port_summary_sums = sharpe_port_summary_sums / tot_data_sets
         provided_porfolio.append(round(prov_port_summary_sums, 2))
@@ -235,4 +215,5 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
     returned_summary_table = pd.DataFrame(returned_summary_dict)
 
     frame = {"df": returned_portfolio_table, "df2": returned_summary_table}
+
     return frame

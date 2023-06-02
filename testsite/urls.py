@@ -20,15 +20,14 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path("admin/", admin.site.urls),
     # Figure out how to redirect instead of needing both lines
-    path("portfolio/", include("portfolio.urls"), name="portfolio"),
-    path("port/", include("portfolio.urls"), name="portfolio"),
+    path("portfolio/", include("portfolio.urls")),
+    path("port/", include("portfolio.urls")),
     #
-    path("", include("home.urls"), name="home"),
-    path("home/", include("home.urls"), name=""),
+    path("", include("home.urls")),
+    path("home/", include("home.urls")),
     #
-    path("about/", include("about.urls"), name="about"),
-    path("questions/", include("questions.urls"), name="questions"),
-    path("collect/", include("collect.urls"), name="collect"),
+    path("about/", include("about.urls")),
+    path("collect/", include("collect.urls")),
     #
-    path("quackers/", include("quackers.urls"), name="quackers"),
+    path("quackers/", include("quackers.urls")),
 ]

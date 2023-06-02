@@ -1,0 +1,3 @@
+still having problems calculating the sharpe ratio percents for the second table. 
+Can grab some of the data but can ahve percents not add up to 100%. Had one where
+table 2 only had a percent > 0 for SPY and even then it was ~40%

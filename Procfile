@@ -1,1 +1,1 @@
-web: gunicorn testsite.wsgi
+web: gunicorn testsite.wsgi --timeout 0 --keep-alive 5

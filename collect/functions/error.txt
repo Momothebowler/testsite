@@ -1,0 +1,29 @@
+{'1985': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1986': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1987': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1988': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1989': array([ 1, 
+ 2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1990': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1991': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1992': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1993': array([ 1,  2,  3,  4,  5,  6, 
+ 7,  8,  9, 10, 11, 12]), '1994': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1995': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1996': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1997': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 
+12]), '1998': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '1999': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2000': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2001': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2002': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2003': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2004': array([ 1,  2,  
+3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2005': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2006': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2007': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2008': array([ 1,  2,  3,  4,  5,  6,  7,  
+8,  9, 10, 11, 12]), '2009': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2010': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2011': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2012': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2013': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2014': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2015': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2016': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2017': array([ 1, 
+ 2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2018': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2019': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2020': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), '2021': array([ 1,  2,  3,  4,  5,  6, 
+ 7,  8,  9, 10, 11, 12]), '2022': array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12])}
+Internal Server Error: /collect/create
+Traceback (most recent call last):
+  File "C:\Users\Momo\Documents\GitHub\testsite\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Momo\Documents\GitHub\testsite\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Momo\Documents\GitHub\testsite\collect\views.py", line 15, in create
+    frame, frame2 = evaulate(request)  # tickers)
+                    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Momo\Documents\GitHub\testsite\collect\functions\scrape.py", line 63, in evaulate
+    frame1 = godDaveMePLease(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Momo\Documents\GitHub\testsite\collect\functions\scrape.py", line 118, in godDaveMePLease
+    all_time_dict[str(earliest_year)] = np.delete(
+                                        ^^^^^^^^^^
+  File "<__array_function__ internals>", line 200, in delete
+  File "C:\Users\Momo\Documents\GitHub\testsite\env\Lib\site-packages\numpy\lib\function_base.py", line 5211, in delete
+    raise IndexError(
+IndexError: index 6 is out of bounds for axis 0 with size 6

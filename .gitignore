@@ -5,3 +5,8 @@ env
 *.log
 *.log
 geckodriver.log
+CACHE
+venv
+.vscode
+DataSheets
+__pycache__
