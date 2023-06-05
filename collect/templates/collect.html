@@ -8,24 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'collect.css' %}" />
     <link rel="stylesheet" href="{% static 'all.css' %}" />
-
-    <script src="{% static 'dropdown.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'collect.css' %}" />
 </head>
 
 
 <body>
     <div id="page-container" style="background-color: rgb(73, 79, 85);">
         <div id="content-wrap">
-            <div>
-                <h2 class="top">Kibler Strategies
-                </h2>
-            </div>
             {% include 'navbar.html' %}
             {% block content %}{% endblock %}
 
-            <form id="post-form">
+            <form id="post-form" class="post-form">
                 {% csrf_token %}
 
                 <section style="padding-bottom: 50px; ">

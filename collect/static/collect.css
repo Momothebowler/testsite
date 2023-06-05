@@ -156,3 +156,7 @@ tr:nth-child(even) {
 tr:hover {
     background: silver;
 }
+
+.post-form {
+    padding-top: 75px;
+}
