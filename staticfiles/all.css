@@ -167,3 +167,25 @@ div.foot {
         display: block;
     }
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #696969 #c7c7c7;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #c7c7c7;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #696969;
+    border-radius: 10px;
+    border: 0px solid #ffffff;
+}
