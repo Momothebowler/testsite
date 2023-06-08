@@ -53,9 +53,11 @@ def evaulate(request):
     posted_send_data["timePeriod"] = 2
 
     # For recommended
-    for x in range(len(posted_tickers)):
-        recommended_send_data["symbol" + str(x + 1)] = posted_tickers[x]
-        recommended_send_data["allocation" + str(x + 1) + "_1"] = posted_allocations[x]
+    for x in range(len(recommended_tickers)):
+        recommended_send_data["symbol" + str(x + 1)] = recommended_tickers[x]
+        recommended_send_data[
+            "allocation" + str(x + 1) + "_1"
+        ] = recommended_tickers_allocations[x]
 
     # selects month-month time period (2) vs year to year (4) DO NOT CHANGE
     recommended_send_data["timePeriod"] = 2
@@ -66,7 +68,6 @@ def evaulate(request):
         posted_tickers,
         posted_send_data,
     )
-    time.sleep(5)
     frame2 = godDaveMePLease(
         int(request.POST["iters"]),
         recommended_tickers_allocations,

@@ -50,7 +50,6 @@ def get_data(
         data=send_data,
     )
     tree = html.fromstring(page.content)
-
     # Checks for the big bad error first
     try:
         bad_message = tree.xpath(
@@ -108,6 +107,7 @@ def get_data(
     try:
         # Parses table data into tickers and %'s
         sharpe_port_from_page = etree.tostring(portfolio_tree[0])
+
         summary_from_page = etree.tostring(summary_tree[0])
 
         summary = re.findall(
@@ -120,7 +120,6 @@ def get_data(
         percent = re.findall(
             '<td class="numberCell">(.*?)</td>', str(sharpe_port_from_page)
         )
-
         for ticker in posted_tickers:
             # checks if its in the dictionary yet and then if it was on the webpage
             # last part is if we a tick with 0% and another with 100% we need

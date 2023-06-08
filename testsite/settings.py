@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "home",
-    "portfolio",
     "about",
     "collect",
     "quackers",
