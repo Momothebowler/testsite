@@ -188,10 +188,13 @@ def godDaveMePLease(loops, allocations, tickers, send_data):
             summary_data[(x * 2) + 1 + y * 24] = summary_data[
                 ((x * 2) + 1) + y * 24
             ].replace(",", "")
-            summary_data[(x * 2) + y * 24] = float(
-                re.sub(r"(?!<\d)\.(?!\d)|[^\s\w.]", "", summary_data[(x * 2) + y * 24])
-            )
+
             try:
+                summary_data[(x * 2) + y * 24] = float(
+                    re.sub(
+                        r"(?!<\d)\.(?!\d)|[^\s\w.]", "", summary_data[(x * 2) + y * 24]
+                    )
+                )
                 summary_data[((x * 2) + 1) + y * 24] = float(
                     re.sub(
                         r"(?!<\d)\.(?!\d)|[^\s\w.]",
