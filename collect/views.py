@@ -30,7 +30,7 @@ def create(request):
             # col_space="38.25px",
             index=False,
         )
-        frame2["df2"] = frame["df2"].rename(
+        frame2["df2"] = frame2["df2"].rename(
             columns={"": "Tickers", "Max Sharpe": "Maximum Sharpe"}
         )
         df3 = pd.concat(
