@@ -1,0 +1,7 @@
+
+services:
+  - type: web
+    name: testsite
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn mysite.wsgi:application"
