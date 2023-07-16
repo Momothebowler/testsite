@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "about",
     "collect",
     "quackers",
+    "sliders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

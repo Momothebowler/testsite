@@ -27,4 +27,6 @@ urlpatterns = [
     path("collect/", include("collect.urls")),
     #
     path("quackers/", include("quackers.urls")),
+    #
+    path("sliders/", include("sliders.urls")),
 ]
