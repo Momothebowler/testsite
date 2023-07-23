@@ -11,54 +11,80 @@
 </head>
 
 <body>
+    <div class="everything">
+        <div class="left_side" style="width:67%">
+            <h1 style="padding-left:40px">Portfolio Adjuster</h1>
+            <div class="all_sliders">
+                <div class="slidecontainer">
+                    <p>Risk</p>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="myRange1">
+                    <p>Value: <span id="demo1"></span></p>
+                </div>
+                <div class="slidecontainer">
+                    <p>Bond Duration</p>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="myRange2">
+                    <p>Value: <span id="demo2"></span></p>
+                </div>
+                <div class="slidecontainer">
+                    <p>International</p>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="myRange3">
+                    <p>Value: <span id="demo3"></span></p>
+                </div>
+            </div>
 
-    <h1>Portfolio Adjuster</h1>
-    <div class="all_sliders">
-        <div class="slidecontainer">
-            <p>Risk</p>
-            <input type="range" min="0" max="100" value="50" class="slider" id="myRange1">
-            <p>Value: <span id="demo1"></span></p>
+            <div id="togglers">
+                <div>
+                    <p id="toggle" style="padding-left:40px">
+                        <span id="tab_switcher"> Data Table
+                        </span>&emsp;
+                        <span id="tab_switcher"> Upload
+                            Portfolio </span>&emsp;
+                        <span id="tab_switcher"> Compare
+                            Portfolios </span>&emsp;
+                        <span id="tab_switcher"> Settings </span>
+                    </p>
+                </div>
+                <div id="main_table" class="percentage_table" style="padding-left: 40px;">
+                </div>
+                <div id="hidden_table" class="upload_table">
+                    <span id="port_label"> Portfolio 1 </span> &emsp;
+                    <span id="port_label"> Portfolio 2 </span>
+                </div>
+                <div id="hidden_table2" class="compare_tables">
+
+                </div>
+                <div id="hidden_table3" class="settings_tab">
+
+                </div>
+            </div>
+            <script src="{% static 'sliders.js'%}"></script>
+            <button class="button-3" role="button">Confirm</button>
+            <script src="{% static 'tableswitch.js'%}"></script>
         </div>
-        <div class="slidecontainer">
-            <p>Bond Duration</p>
-            <input type="range" min="0" max="100" value="50" class="slider" id="myRange2">
-            <p>Value: <span id="demo2"></span></p>
-        </div>
-        <div class="slidecontainer">
-            <p>International</p>
-            <input type="range" min="0" max="100" value="50" class="slider" id="myRange3">
-            <p>Value: <span id="demo3"></span></p>
+        <div class="right_side" style="width:37%;height:100%;border:1px solid white">
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
+            <p>Help</p>
         </div>
     </div>
-
-    <div id="togglers">
-        <div>
-            <p id="toggle">
-                <span id="tab_switcher"> Data Table
-                </span>&emsp;
-                <span id="tab_switcher"> Upload
-                    Portfolio </span>&emsp;
-                <span id="tab_switcher"> Compare
-                    Portfolios </span>&emsp;
-                <span id="tab_switcher"> Settings </span>
-            </p>
-        </div>
-        <div id="main_table" class="percentage_table">
-        </div>
-        <div id="hidden_table" class="upload_table">
-            <span id="port_label"> Portfolio 1 </span> &emsp;
-            <span id="port_label"> Portfolio 2 </span>
-        </div>
-        <div id="hidden_table2" class="compare_tables">
-
-        </div>
-        <div id="hidden_table3" class="settings_tab">
-
-        </div>
-    </div>
-    <script src="{% static 'sliders.js'%}"></script>
-    <button class="button-3" role="button">Confirm</button>
-    <script src="{% static 'tableswitch.js'%}"></script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@ body {
 .slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 50%;
+    width: 94%;
     height: 15px;
     border-radius: 5px;
     background: #d3d3d3;
@@ -217,4 +217,10 @@ td {
 #all_sliders {
     display: table;
     width: 100%;
+}
+
+.everything {
+    width: 100%;
+    display: flex;
+
 }
