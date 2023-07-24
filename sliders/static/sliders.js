@@ -200,7 +200,7 @@ $('.upload_table > span').click(function () {
             //currency_percent.textContent = (Math.round(currency_weights[i] * 5000) / 100).toFixed(2) + "%"; // currency_value)/100+"%";
         }
         $('#main_table').toggle();
-        $('#hidden_table').toggle();
+        $('#hidden_table2').toggle();
     }
     if (ix === 1) {
         slider1.value = 30;
@@ -233,6 +233,6 @@ $('.upload_table > span').click(function () {
             //currency_percent.textContent = (Math.round(currency_weights[i] * 5000) / 100).toFixed(2) + "%"; // currency_value)/100+"%";
         }
         $('#main_table').toggle();
-        $('#hidden_table').toggle();
+        $('#hidden_table2').toggle();
     }
 });

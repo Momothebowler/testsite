@@ -1,6 +1,7 @@
 body {
     background-color: black;
     color: white;
+    margin: 0;
 }
 
 .slidecontainer {
@@ -46,7 +47,6 @@ body {
 
 /* CSS */
 .button-3 {
-
     appearance: none;
     background-color: #2ea44f;
     border: 1px solid rgba(27, 31, 35, .15);
@@ -61,6 +61,7 @@ body {
     font-weight: 600;
     line-height: 20px;
     margin-top: 16px;
+    margin-left: 40px;
     padding: 6px 16px;
     position: relative;
     position: relative;
@@ -195,13 +196,24 @@ td {
     color: rgba(0, 0, 0, 0.275);
 }
 
-#hidden_table {
+#hidden_table,
+#hidden_table2,
+#hidden_table3 {
     display: none;
+}
+
+.upload_table {
+    padding-left: 40px;
 }
 
 #tab_switcher {
     text-decoration: underline solid white 5px;
     text-decoration-skip-ink: none;
+}
+
+#tab_switcher:hover {
+    background-color: yellow;
+    cursor: pointer;
 }
 
 #main_Table {
@@ -223,4 +235,115 @@ td {
     width: 100%;
     display: flex;
 
+}
+
+.right_side {
+    width: 37%;
+    height: 100%;
+    border: 1px solid white;
+    margin-left: 25px;
+    padding: 5px 15px 5px 15px;
+}
+
+.left_side {
+    width: 67%;
+}
+
+.title {
+    padding-left: 40px;
+}
+
+#toggle {
+    padding-left: 40px;
+    font-size: 20px;
+}
+
+.percentage_table {
+    padding-left: 40px;
+}
+
+#help_text {
+    font-size: 1.1875em;
+    font-family: " Mercury SSm A", "Mercury SSm B", Georgia,
+        Times, "Times New Roman", "Microsoft YaHei New", "Microsoft Yahei", "微软雅黑", 宋体, SimSun,
+        STXihei, "华文细黑", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+}
+
+
+
+.navbar {
+    overflow: auto;
+    float: right;
+    right: 5%;
+    position: relative;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 1.6em;
+    letter-spacing: 0.1em;
+    display: inline-block;
+    position: relative;
+    padding-top: 70px;
+    margin-left: 20px;
+    font-weight: bold;
+    -webkit-transition: color 0.5s;
+    -moz-transition: color 0.5s;
+    -o-transition: color 0.5s;
+    transition: color 0.5s;
+}
+
+.navbar a:hover {
+    color: #4dff00;
+}
+
+
+.logo {
+    overflow: auto;
+    float: left;
+    left: 5%;
+    position: relative;
+}
+
+.logo p {
+    text-decoration: none;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 1.6em;
+    letter-spacing: 0.1em;
+    display: inline-block;
+    position: relative;
+    padding-top: 44px;
+    font-weight: bold;
+}
+
+
+div.footer_holder {
+    height: 40px;
+    width: 100vw;
+    background-color: rgb(73, 79, 85);
+}
+
+.foot>p {
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #d7d7d7;
+}
+
+div.foot {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(233, 233, 233, .2);
+    color: rgb(0, 0, 0);
+    text-align: center;
 }

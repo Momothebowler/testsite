@@ -11,9 +11,12 @@
 </head>
 
 <body>
+    {% include 'navbar.html' %}
+    {% block content %}{% endblock %}
     <div class="everything">
-        <div class="left_side" style="width:67%">
-            <h1 style="padding-left:40px">Portfolio Adjuster</h1>
+
+        <div class="left_side">
+            <h1 class="title">Portfolio Adjuster</h1>
             <div class="all_sliders">
                 <div class="slidecontainer">
                     <p>Risk</p>
@@ -34,56 +37,97 @@
 
             <div id="togglers">
                 <div>
-                    <p id="toggle" style="padding-left:40px">
+                    <p id="toggle">
                         <span id="tab_switcher"> Data Table
                         </span>&emsp;
-                        <span id="tab_switcher"> Upload
-                            Portfolio </span>&emsp;
                         <span id="tab_switcher"> Compare
                             Portfolios </span>&emsp;
+                        <span id="tab_switcher"> Upload
+                            Portfolio </span>&emsp;
                         <span id="tab_switcher"> Settings </span>
                     </p>
                 </div>
-                <div id="main_table" class="percentage_table" style="padding-left: 40px;">
+                <div id="main_table" class="percentage_table">
                 </div>
-                <div id="hidden_table" class="upload_table">
+                <div id="hidden_table" class="compare_tables">
+                    <p>Comparing Coming Soon ...</p>
+                </div>
+                <div id="hidden_table2" class="upload_table">
                     <span id="port_label"> Portfolio 1 </span> &emsp;
                     <span id="port_label"> Portfolio 2 </span>
                 </div>
-                <div id="hidden_table2" class="compare_tables">
 
-                </div>
                 <div id="hidden_table3" class="settings_tab">
-
+                    <p>No Settings To Speak Of.</p>
                 </div>
             </div>
             <script src="{% static 'sliders.js'%}"></script>
             <button class="button-3" role="button">Confirm</button>
             <script src="{% static 'tableswitch.js'%}"></script>
         </div>
-        <div class="right_side" style="width:37%;height:100%;border:1px solid white">
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
-            <p>Help</p>
+        <div class="right_side">
+            <p id="help_text">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod
+                tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Et leo duis ut diam quam nulla porttitor massa. Purus non enim praesent elementum
+                facilisis leo vel. Libero nunc consequat interdum varius sit amet mattis. Nec ultrices dui sapien eget
+                mi proin sed libero enim. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Potenti
+                nullam ac tortor vitae purus. Semper eget duis at tellus. Aliquam sem fringilla ut morbi tincidunt augue
+                interdum velit. Euismod elementum nisi quis eleifend quam adipiscing vitae proin. Pellentesque habitant
+                morbi tristique senectus. Id porta nibh venenatis cras sed felis eget velit aliquet. Ac orci phasellus
+                egestas tellus rutrum. Ornare quam viverra orci sagittis eu. Egestas tellus rutrum tellus pellentesque
+                eu tincidunt tortor. Sem et tortor consequat id porta. Congue eu consequat ac felis donec et. Ultricies
+                leo integer malesuada nunc vel risus commodo.
+
+                Nascetur ridiculus mus mauris vitae ultricies. Aliquet eget sit amet tellus cras. Aenean euismod
+                elementum nisi quis eleifend quam adipiscing vitae. Facilisi cras fermentum odio eu feugiat. Id volutpat
+                lacus laoreet non. Dui accumsan sit amet nulla. Tincidunt nunc pulvinar sapien et ligula ullamcorper
+                malesuada. Erat pellentesque adipiscing commodo elit at. Ut etiam sit amet nisl purus in mollis. At in
+                tellus integer feugiat. Turpis nunc eget lorem dolor sed viverra ipsum nunc aliquet. Nibh ipsum
+                consequat nisl vel. Donec et odio pellentesque diam volutpat. Et ligula ullamcorper malesuada proin
+                libero nunc consequat. Maecenas pharetra convallis posuere morbi leo.
+
+                Amet dictum sit amet justo donec enim. Et malesuada fames ac turpis. Sem et tortor consequat id porta
+                nibh venenatis. Nunc scelerisque viverra mauris in aliquam sem fringilla ut. Adipiscing diam donec
+                adipiscing tristique risus nec. Vitae sapien pellentesque habitant morbi tristique senectus et. Eget
+                lorem dolor sed viverra ipsum nunc aliquet bibendum. Lorem sed risus ultricies tristique nulla aliquet.
+                Volutpat commodo sed egestas egestas fringilla. In aliquam sem fringilla ut morbi tincidunt augue
+                interdum. Enim praesent elementum facilisis leo vel fringilla est ullamcorper eget. Morbi tristique
+                senectus et netus et malesuada fames. Praesent elementum facilisis leo vel.
+
+                Quam adipiscing vitae proin sagittis nisl. Sed ullamcorper morbi tincidunt ornare massa eget. Et
+                malesuada fames ac turpis egestas maecenas pharetra convallis posuere. Id diam maecenas ultricies mi
+                eget mauris pharetra et. Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam. Cras ornare
+                arcu dui vivamus. Varius vel pharetra vel turpis nunc eget lorem dolor. At volutpat diam ut venenatis
+                tellus in. Tellus orci ac auctor augue mauris augue. Consectetur adipiscing elit duis tristique
+                sollicitudin nibh. Quisque non tellus orci ac. Vel facilisis volutpat est velit. Pellentesque habitant
+                morbi tristique senectus et netus et. Eget dolor morbi non arcu risus quis varius quam. Duis ultricies
+                lacus sed turpis tincidunt id. Consectetur lorem donec massa sapien faucibus. Nisl suscipit adipiscing
+                bibendum est ultricies.
+
+                Et magnis dis parturient montes. Gravida rutrum quisque non tellus orci. Euismod elementum nisi quis
+                eleifend. Massa id neque aliquam vestibulum. Mauris augue neque gravida in. Eu non diam phasellus
+                vestibulum lorem sed. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ultricies
+                tristique nulla aliquet enim tortor. Eget lorem dolor sed viverra ipsum nunc. Vivamus at augue eget arcu
+                dictum varius duis at consectetur. Felis bibendum ut tristique et egestas quis ipsum suspendisse. Arcu
+                non odio euismod lacinia. Nisi scelerisque eu ultrices vitae auctor. Aenean euismod elementum nisi quis
+                eleifend quam adipiscing vitae proin. At auctor urna nunc id. Nunc id cursus metus aliquam eleifend mi
+                in nulla. Sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus. Arcu odio ut sem
+                nulla pharetra diam sit.
         </div>
+
+    </div>
+    <div class="footer_holder">
+
+        <p style="text-align: center;padding-top: 12px;">
+            Kibler Strategies 2022
+        </p>
+
     </div>
 </body>
 
